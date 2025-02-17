@@ -27,12 +27,7 @@ body {
     transition: transform 0.3s ease;
 }
 
-/* Estilos de formulário */
-.form-input:focus {
-    outline: none;
-    ring: 2px;
-    ring-color: #0052FF;
-}
+
 
 /* Animações */
 @keyframes fadeIn {
