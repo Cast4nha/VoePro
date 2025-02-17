@@ -199,4 +199,28 @@ section.about-section h2 span.text-white {
 .about-section h2 {
     position: relative;
     z-index: 1;
+}
+
+/* Efeito flutuante para o banner */
+.floating-banner {
+    animation: float 6s ease-in-out infinite;
+    transition: transform 0.3s ease-out;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* Container para o efeito parallax */
+.parallax-container {
+    perspective: 1000px;
+    overflow: hidden;
 } 

@@ -102,4 +102,33 @@ document.getElementById('gallery-modal').addEventListener('click', (e) => {
         document.getElementById('gallery-modal').classList.remove('active');
         document.body.style.overflow = 'auto';
     }
-}); 
+});
+
+// Efeito parallax no banner
+const parallaxBanner = () => {
+    const banner = document.querySelector('.floating-banner');
+    const container = document.querySelector('.parallax-container');
+
+    if (banner && container) {
+        container.addEventListener('mousemove', (e) => {
+            const rect = container.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const moveX = (mouseX - centerX) / 25;
+            const moveY = (mouseY - centerY) / 25;
+
+            banner.style.transform = `translate3d(${moveX}px, ${moveY}px, 0) translateY(${-15 * Math.sin(Date.now() / 1000)}px)`;
+        });
+
+        container.addEventListener('mouseleave', () => {
+            banner.style.transform = 'translate3d(0, 0, 0)';
+        });
+    }
+};
+
+// Inicializar o efeito parallax
+parallaxBanner(); 
