@@ -131,4 +131,25 @@ const parallaxBanner = () => {
 };
 
 // Inicializar o efeito parallax
-parallaxBanner(); 
+parallaxBanner();
+
+// Gerenciamento do popup de termos
+document.addEventListener('DOMContentLoaded', () => {
+    const termsAccepted = localStorage.getItem('termsAccepted');
+    const popup = document.getElementById('termsPopup');
+    
+    if (!termsAccepted) {
+        popup.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    document.getElementById('acceptTerms').addEventListener('click', () => {
+        localStorage.setItem('termsAccepted', 'true');
+        popup.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    });
+
+    document.getElementById('declineTerms').addEventListener('click', () => {
+        window.location.href = 'https://www.google.com'; // Ou qualquer outra página de redirecionamento
+    });
+}); 

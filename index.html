@@ -35,9 +35,73 @@
         body {
             font-family: 'Poppins', sans-serif;
         }
+        /* Estilos para o popup de termos */
+        .terms-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .terms-popup.active {
+            display: flex;
+        }
+
+        .terms-popup-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .terms-popup-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
     </style>
 </head>
 <body class="bg-white">
+    <!-- Adicionar logo após a abertura do body -->
+    <div class="terms-popup" id="termsPopup">
+        <div class="terms-popup-content">
+            <h2 class="text-2xl font-bold mb-4 text-primary">Termos de Uso</h2>
+            <p class="mb-4 text-gray-600">
+                Antes de continuar navegando em nosso site, gostaríamos de informar que ao utilizar nossos serviços, 
+                você concorda com nossos termos de uso.
+            </p>
+            <div class="text-center mb-6">
+                <a href="./assets/TERMOS DE USO - CONDICOES - PRIVACIDADE.pdf" 
+                   target="_blank"
+                   class="text-center text-primary hover:text-secondary transition-colors duration-300 inline-flex flex-col items-center">
+                    <i class="fas fa-file-pdf text-2xl mb-2"></i>
+                    <span class="block">Ler Termos de Uso</span>
+                </a>
+            </div>
+            <div class="terms-popup-buttons">
+                <button id="declineTerms" 
+                        class="px-6 py-2 bg-gray-300 text-gray-700 rounded-full hover:bg-gray-400 transition">
+                    Recusar
+                </button>
+                <button id="acceptTerms" 
+                        class="px-6 py-2 bg-primary text-white rounded-full hover:bg-opacity-90 transition">
+                    Aceitar e Continuar
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Navbar -->
     <nav class="fixed w-full bg-white shadow-lg z-50">
         <div class="container mx-auto px-4 py-3">
@@ -320,80 +384,44 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-primary text-white py-12">
+    <footer class="bg-primary text-white py-6">
         <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-4 gap-8">
-                <!-- Coluna 1 - Logo e Descrição -->
-                <div>
-                    <div class="text-2xl font-bold mb-4">
-                        <span class="text-white">Voe</span>
-                        <span class="text-secondary">PRO</span>
-                    </div>
-                    <p class="text-gray-300">Sua agência de viagens de confiança, levando você aos melhores destinos com os melhores preços.</p>
-                </div>
-
-                <!-- Coluna 2 - Informações da Empresa -->
-                <div>
-                    <h4 class="text-xl font-semibold mb-4">Informações Legais</h4>
-                    <ul class="space-y-2 text-gray-300">
-                        <li>CNPJ: 00.000.000/0001-00</li>
-                        <li>Razão Social: VoePRO Agência de Viagens LTDA</li>
-                        <li>CADASTUR: 26.000000.10</li>
-                        <li>IATA: 00-0-00000</li>
-                    </ul>
-                </div>
-
-                <!-- Coluna 3 - Endereço e Contato -->
-                <div>
-                    <h4 class="text-xl font-semibold mb-4">Localização</h4>
-                    <ul class="space-y-2 text-gray-300">
-                        <li>
-                            <i class="fas fa-map-marker-alt mr-2"></i>
-                            Av. Paulista, 1000 - Bela Vista
-                        </li>
-                        <li>São Paulo - SP, 01310-100</li>
-                        <li>
-                            <i class="fas fa-phone mr-2"></i>
-                            +55 (11) 9999-9999
-                        </li>
-                        <li>
-                            <i class="fas fa-envelope mr-2"></i>
-                            contato@voepro.com.br
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Coluna 4 - Links Rápidos -->
-                <div>
-                    <h4 class="text-xl font-semibold mb-4">Links Rápidos</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#home" class="text-gray-300 hover:text-white transition">Início</a></li>
-                        <li><a href="#about" class="text-gray-300 hover:text-white transition">Quem Somos</a></li>
-                        <li><a href="#gallery" class="text-gray-300 hover:text-white transition">Galeria</a></li>
-                        <li><a href="#contact" class="text-gray-300 hover:text-white transition">Contato</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Redes Sociais -->
-            <div class="border-t border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <div class="flex space-x-6 mb-4 md:mb-0">
-                    <a href="#" class="text-gray-300 hover:text-secondary transition">
-                        <i class="fab fa-instagram text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-300 hover:text-secondary transition">
-                        <i class="fab fa-facebook text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-300 hover:text-secondary transition">
-                        <i class="fab fa-whatsapp text-xl"></i>
-                    </a>
-                </div>
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
+                <p>&copy; 2024 VoePRO. Todos os direitos reservados.</p>
                 
-                <!-- Copyright -->
-                <div class="text-center md:text-right text-gray-300">
-                    <p>&copy; 2025 VoePRO. Todos os direitos reservados.</p>
-                    <p class="text-sm mt-1">Desenvolvido com <i class="fas fa-heart text-secondary"></i> por VoePRO</p>
+                <!-- Social e Contato -->
+                <div class="flex items-center gap-6">
+                    <a href="mailto:contato@voepro.com.br" 
+                       class="hover:text-secondary transition-colors duration-300 flex items-center gap-2">
+                        <i class="fas fa-envelope text-base"></i>
+                        <span>contato@voepro.com.br</span>
+                    </a>
+                    
+                    <!-- Redes Sociais -->
+                    <div class="flex items-center gap-4">
+                        <a href="https://instagram.com/voepro" 
+                           target="_blank" 
+                           class="hover:text-secondary transition-colors duration-300">
+                            <i class="fab fa-instagram text-lg"></i>
+                        </a>
+                        <a href="https://facebook.com/voepro" 
+                           target="_blank" 
+                           class="hover:text-secondary transition-colors duration-300">
+                            <i class="fab fa-facebook text-lg"></i>
+                        </a>
+                        <a href="https://wa.me/seunumero" 
+                           target="_blank" 
+                           class="hover:text-secondary transition-colors duration-300">
+                            <i class="fab fa-whatsapp text-lg"></i>
+                        </a>
+                    </div>
                 </div>
+
+                <a href="./assets/TERMOS DE USO - CONDICOES - PRIVACIDADE.pdf" 
+                   target="_blank"
+                   class="hover:text-secondary transition-colors duration-300">
+                    Termos de Uso
+                </a>
             </div>
         </div>
     </footer>
