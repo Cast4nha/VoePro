@@ -31,6 +31,7 @@
             }
         }
     </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -80,6 +81,39 @@
             justify-content: center;
             margin-top: 1.5rem;
         }
+
+        .swiper {
+            width: 100%;
+            height: 100%;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .promo-card {
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .promo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
     </style>
 </head>
 <body class="bg-white">
@@ -124,7 +158,7 @@
                        target="_blank" 
                        class="flex items-center gap-2 bg-primary text-white px-6 py-2 rounded-full hover:bg-opacity-90 transition-all duration-300 hover:scale-105">
                         <i class="fab fa-whatsapp text-xl"></i>
-                        <span>Fale Conosco</span>
+                        <span>Faça a sua reserva</span>
                     </a>
                 </div>
             </div>
@@ -133,22 +167,105 @@
 
     <main>
         <!-- Hero Section -->
-        <section id="home" class="pt-24 pb-12 bg-primary">
+        <section id="home" class="pt-20 pb-12 bg-primary">
             <div class="container mx-auto px-4">
-                <div class="flex flex-col md:flex-row items-center">
+                <div class="flex flex-col md:flex-row items-center gap-8">
                     <div class="md:w-1/2 text-white">
-                        <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                        <h1 class="text-4xl md:text-5xl font-bold mb-4">
                             <span class="text-secondary">Sobrevoando</span> fronteiras para que 
                             <span class="text-secondary">você</span> possa 
                             <span class="text-secondary">conhecer o mundo</span>
                         </h1>
                         <p class="text-xl mb-8">Te ajudamos a encontrar os melhores preços de passagens aéreas</p>
-                        <button class="bg-secondary text-white px-8 py-3 rounded-full hover:bg-opacity-90 transition">
+                        <a href="https://wa.me/5511999999999" 
+                           target="_blank"
+                           class="inline-flex items-center gap-2 bg-secondary text-white px-8 py-3 rounded-full hover:bg-opacity-90 transition">
+                            <i class="fab fa-whatsapp text-xl"></i>
                             Consultar Agora
-                        </button>
+                        </a>
                     </div>
-                    <div class="md:w-1/2 mt-8 md:mt-0 parallax-container">
-                        <img src="./assets/banner1.png" alt="Banner VoePRO" class="w-full h-auto rounded-lg shadow-xl floating-banner">
+                    <div class="md:w-1/2">
+                        <!-- Slider main container -->
+                        <div class="swiper mySwiper rounded-lg overflow-hidden">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <img src="./assets/banner1.png" alt="Destino 1">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="./assets/banner2.png" alt="Destino 2">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="./assets/banner3.png" alt="Destino 3">
+                                </div>
+                            </div>
+                            <div class="swiper-pagination"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Promoções Cards -->
+            <div class="container mx-auto px-4 mt-12">
+                <h2 class="text-2xl font-bold text-white mb-8">Promoções Imperdíveis</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Card 1 -->
+                    <div class="promo-card">
+                        <img src="./assets/banner4.png" alt="Promoção 1" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <span class="bg-secondary text-white px-3 py-1 rounded-full text-sm">Pacote Completo</span>
+                            <h3 class="text-xl font-bold mt-4 text-gray-800">Paris - França</h3>
+                            <p class="text-gray-600 mt-2">7 dias | Hotel + Passagem + Transfer</p>
+                            <div class="mt-4 flex justify-between items-center">
+                                <div>
+                                    <span class="text-gray-400 line-through">R$ 8.999</span>
+                                    <p class="text-primary font-bold text-2xl">R$ 6.999</p>
+                                </div>
+                                <a href="https://wa.me/5511999999999" target="_blank" 
+                                   class="bg-primary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">
+                                    Reservar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="promo-card">
+                        <img src="./assets/banner5.png" alt="Promoção 2" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <span class="bg-secondary text-white px-3 py-1 rounded-full text-sm">Pacote Completo</span>
+                            <h3 class="text-xl font-bold mt-4 text-gray-800">Cancún - México</h3>
+                            <p class="text-gray-600 mt-2">5 dias | All Inclusive</p>
+                            <div class="mt-4 flex justify-between items-center">
+                                <div>
+                                    <span class="text-gray-400 line-through">R$ 7.999</span>
+                                    <p class="text-primary font-bold text-2xl">R$ 5.999</p>
+                                </div>
+                                <a href="https://wa.me/5511999999999" target="_blank" 
+                                   class="bg-primary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">
+                                    Reservar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="promo-card">
+                        <img src="./assets/banner3.png" alt="Promoção 3" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <span class="bg-secondary text-white px-3 py-1 rounded-full text-sm">Pacote Completo</span>
+                            <h3 class="text-xl font-bold mt-4 text-gray-800">Dubai - EAU</h3>
+                            <p class="text-gray-600 mt-2">8 dias | Hotel 5 Estrelas</p>
+                            <div class="mt-4 flex justify-between items-center">
+                                <div>
+                                    <span class="text-gray-400 line-through">R$ 12.999</span>
+                                    <p class="text-primary font-bold text-2xl">R$ 9.999</p>
+                                </div>
+                                <a href="https://wa.me/5511999999999" target="_blank" 
+                                   class="bg-primary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">
+                                    Reservar
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -161,14 +278,14 @@
                     <div class="md:w-1/2">
                         <h2 class="text-3xl md:text-4xl font-bold mb-4">
                             <span class="text-primary">Quem</span> 
-                            <span class="text-secondary">Somos</span>
+                            <span class="text-secondary">somos</span>
                         </h2>
                         <p class="text-gray-600 text-lg mb-6">Anos de experiência no mercado de viagens, oferecendo as melhores oportunidades para nossos clientes. Trabalhamos com dedicação para tornar suas viagens inesquecíveis, sempre com os melhores preços e condições.</p>
                         
                         <div class="grid grid-cols-2 gap-4 mt-6">
                             <div class="flex items-center space-x-2">
                                 <i class="fas fa-check-circle text-primary"></i>
-                                <span class="text-gray-600">Experiência Comprovada</span>
+                                <span class="text-gray-600">Experiência comprovada</span>
                             </div>
                             <div class="flex items-center space-x-2">
                                 <i class="fas fa-check-circle text-primary"></i>
@@ -180,7 +297,7 @@
                             </div>
                             <div class="flex items-center space-x-2">
                                 <i class="fas fa-check-circle text-primary"></i>
-                                <span class="text-gray-600">Atendimento Premium</span>
+                                <span class="text-gray-600">Atendimento premium</span>
                             </div>
                         </div>
                     </div>
@@ -201,7 +318,7 @@
                     <div class="md:w-1/2 md:pl-12 order-1 md:order-2">
                         <h2 class="text-3xl md:text-4xl font-bold mb-4">
                             <span class="text-primary">Viaje com</span> 
-                            <span class="text-secondary">Conforto</span>
+                            <span class="text-secondary">conforto</span>
                         </h2>
                         <p class="text-gray-600 text-lg mb-6">Descubra o mundo com o máximo de conforto e segurança. Oferecemos as melhores opções para sua viagem dos sonhos.</p>
                     </div>
@@ -216,7 +333,7 @@
                     <div class="md:w-1/2">
                         <h2 class="text-3xl md:text-4xl font-bold mb-4">
                             <span class="text-primary">Destinos</span> 
-                            <span class="text-secondary">Incríveis</span>
+                            <span class="text-secondary">incríveis</span>
                         </h2>
                         <p class="text-gray-600 text-lg mb-6">Explore destinos únicos e crie memórias inesquecíveis com nossas ofertas exclusivas.</p>
                     </div>
@@ -237,7 +354,7 @@
                     <div class="md:w-1/2 md:pl-12 order-1 md:order-2">
                         <h2 class="text-3xl md:text-4xl font-bold mb-4">
                             <span class="text-primary">Experiências</span> 
-                            <span class="text-secondary">Únicas</span>
+                            <span class="text-secondary">únicas</span>
                         </h2>
                         <p class="text-gray-600 text-lg mb-6">Cada viagem é uma nova história para contar. Deixe-nos criar experiências memoráveis para você.</p>
                     </div>
@@ -345,7 +462,7 @@
         <div class="container mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">
                 <span class="text-white">Entre em</span> 
-                <span class="text-secondary">Contato</span>
+                <span class="text-secondary">contato</span>
             </h2>
             
             <div class="grid md:grid-cols-3 gap-8">
@@ -378,7 +495,7 @@
                 <!-- Telefone Card -->
                 <div class="glass-panel p-8 rounded-xl text-center">
                     <div class="icon text-primary text-5xl mb-4">
-                        <i class="fas fa-phone-alt"></i>
+                        <i class="fas fa-mobile-alt"></i>
                     </div>
                     <h3 class="text-xl font-semibold mb-3">Telefone</h3>
                     <p class="text-gray-600 mb-4">Atendimento comercial</p>
@@ -440,5 +557,19 @@
     
     <!-- JavaScript -->
     <script src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            effect: "fade",
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+        });
+    </script>
 </body>
 </html> 
