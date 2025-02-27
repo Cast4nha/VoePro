@@ -34,7 +34,17 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            padding: 0;
         }
+
+        footer {
+            margin-top: auto;
+        }
+
         /* Estilos para o popup de termos */
         .terms-popup {
             display: none;
@@ -73,7 +83,7 @@
     </style>
 </head>
 <body class="bg-white">
-    <!-- Adicionar logo após a abertura do body -->
+    <!-- Popup de Termos -->
     <div class="terms-popup" id="termsPopup">
         <div class="terms-popup-content">
             <h2 class="text-2xl font-bold mb-4 text-primary">Termos de Uso</h2>
@@ -109,227 +119,226 @@
                 <div>
                     <img src="./assets/logo-nav.png" alt="VoePRO Logo" class="h-12">
                 </div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#home" class="text-gray-700 hover:text-primary transition">Início</a>
-                    <a href="#about" class="text-gray-700 hover:text-primary transition">Quem Somos</a>
-                    <a href="#gallery" class="text-gray-700 hover:text-primary transition">Galeria</a>
-                    <a href="#contact" class="text-gray-700 hover:text-primary transition">Contato</a>
+                <div>
+                    <a href="https://wa.me/5511999999999" 
+                       target="_blank" 
+                       class="flex items-center gap-2 bg-primary text-white px-6 py-2 rounded-full hover:bg-opacity-90 transition-all duration-300 hover:scale-105">
+                        <i class="fab fa-whatsapp text-xl"></i>
+                        <span>Fale Conosco</span>
+                    </a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="pt-24 pb-12 bg-primary">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 text-white">
-                    <h1 class="text-4xl md:text-6xl font-bold mb-4">
-                        <span class="text-secondary">Sobrevoando</span> fronteiras para que 
-                        <span class="text-secondary">você</span> possa 
-                        <span class="text-secondary">conhecer o mundo</span>
-                    </h1>
-                    <p class="text-xl mb-8">Te ajudamos a encontrar os melhores preços de passagens aéreas</p>
-                    <button class="bg-secondary text-white px-8 py-3 rounded-full hover:bg-opacity-90 transition">
-                        Consultar Agora
-                    </button>
-                </div>
-                <div class="md:w-1/2 mt-8 md:mt-0 parallax-container">
-                    <img src="./assets/banner1.png" alt="Banner VoePRO" class="w-full h-auto rounded-lg shadow-xl floating-banner">
-                </div>
-            </div>
-        </div>
-    </section>
-
-     <!-- About Section -->
-     <section id="about" class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4">
-                        <span class="text-primary">Quem</span> 
-                        <span class="text-secondary">Somos</span>
-                    </h2>
-                    <p class="text-gray-600 text-lg mb-6">Anos de experiência no mercado de viagens, oferecendo as melhores oportunidades para nossos clientes. Trabalhamos com dedicação para tornar suas viagens inesquecíveis, sempre com os melhores preços e condições.</p>
-                    
-                    <div class="grid grid-cols-2 gap-4 mt-6">
-                        <div class="flex items-center space-x-2">
-                            <i class="fas fa-check-circle text-primary"></i>
-                            <span class="text-gray-600">Experiência Comprovada</span>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <i class="fas fa-check-circle text-primary"></i>
-                            <span class="text-gray-600">Suporte 24/7</span>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <i class="fas fa-check-circle text-primary"></i>
-                            <span class="text-gray-600">Melhores Preços</span>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <i class="fas fa-check-circle text-primary"></i>
-                            <span class="text-gray-600">Atendimento Premium</span>
-                        </div>
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="pt-24 pb-12 bg-primary">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 text-white">
+                        <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                            <span class="text-secondary">Sobrevoando</span> fronteiras para que 
+                            <span class="text-secondary">você</span> possa 
+                            <span class="text-secondary">conhecer o mundo</span>
+                        </h1>
+                        <p class="text-xl mb-8">Te ajudamos a encontrar os melhores preços de passagens aéreas</p>
+                        <button class="bg-secondary text-white px-8 py-3 rounded-full hover:bg-opacity-90 transition">
+                            Consultar Agora
+                        </button>
+                    </div>
+                    <div class="md:w-1/2 mt-8 md:mt-0 parallax-container">
+                        <img src="./assets/banner1.png" alt="Banner VoePRO" class="w-full h-auto rounded-lg shadow-xl floating-banner">
                     </div>
                 </div>
-                <div class="md:w-1/2 mt-8 md:mt-0 md:pl-12 parallax-container">
-                    <img src="./assets/banner2.png" alt="Banner VoePRO Quem Somos" class="w-full h-auto rounded-lg shadow-xl floating-banner">
-                </div>
             </div>
-        </div>
-    </section>
-    
+        </section>
 
-    <!-- Seção após About -->
-    <section class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mt-8 md:mt-0 parallax-container order-2 md:order-1">
-                    <img src="./assets/banner3.png" alt="Banner VoePRO 3" class="w-full h-auto rounded-lg shadow-xl floating-banner">
-                </div>
-                <div class="md:w-1/2 md:pl-12 order-1 md:order-2">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4">
-                        <span class="text-primary">Viaje com</span> 
-                        <span class="text-secondary">Conforto</span>
-                    </h2>
-                    <p class="text-gray-600 text-lg mb-6">Descubra o mundo com o máximo de conforto e segurança. Oferecemos as melhores opções para sua viagem dos sonhos.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Seção antes da Galeria -->
-    <section class="py-20 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4">
-                        <span class="text-primary">Destinos</span> 
-                        <span class="text-secondary">Incríveis</span>
-                    </h2>
-                    <p class="text-gray-600 text-lg mb-6">Explore destinos únicos e crie memórias inesquecíveis com nossas ofertas exclusivas.</p>
-                </div>
-                <div class="md:w-1/2 mt-8 md:mt-0 md:pl-12 parallax-container">
-                    <img src="./assets/banner5.png" alt="Banner VoePRO 4" class="w-full h-auto rounded-lg shadow-xl floating-banner">
-                </div>
-            </div>
-        </div>
-    </section>
-
-            <!-- Seção após a Galeria -->
-            <section class="py-20 bg-white">
-                <div class="container mx-auto px-4">
-                    <div class="flex flex-col md:flex-row items-center">
-                        <div class="md:w-1/2 mt-8 md:mt-0 parallax-container order-2 md:order-1">
-                            <img src="./assets/banner4.png" alt="Banner VoePRO 5" class="w-full h-auto rounded-lg shadow-xl floating-banner">
-                        </div>
-                        <div class="md:w-1/2 md:pl-12 order-1 md:order-2">
-                            <h2 class="text-3xl md:text-4xl font-bold mb-4">
-                                <span class="text-primary">Experiências</span> 
-                                <span class="text-secondary">Únicas</span>
-                            </h2>
-                            <p class="text-gray-600 text-lg mb-6">Cada viagem é uma nova história para contar. Deixe-nos criar experiências memoráveis para você.</p>
+        <!-- About Section -->
+        <section id="about" class="py-20 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                            <span class="text-primary">Quem</span> 
+                            <span class="text-secondary">Somos</span>
+                        </h2>
+                        <p class="text-gray-600 text-lg mb-6">Anos de experiência no mercado de viagens, oferecendo as melhores oportunidades para nossos clientes. Trabalhamos com dedicação para tornar suas viagens inesquecíveis, sempre com os melhores preços e condições.</p>
+                        
+                        <div class="grid grid-cols-2 gap-4 mt-6">
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-check-circle text-primary"></i>
+                                <span class="text-gray-600">Experiência Comprovada</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-check-circle text-primary"></i>
+                                <span class="text-gray-600">Suporte 24/7</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-check-circle text-primary"></i>
+                                <span class="text-gray-600">Melhores Preços</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-check-circle text-primary"></i>
+                                <span class="text-gray-600">Atendimento Premium</span>
+                            </div>
                         </div>
                     </div>
+                    <div class="md:w-1/2 mt-8 md:mt-0 md:pl-12 parallax-container">
+                        <img src="./assets/banner2.png" alt="Banner VoePRO Quem Somos" class="w-full h-auto rounded-lg shadow-xl floating-banner">
+                    </div>
                 </div>
-            </section>
+            </div>
+        </section>
+        
+        <!-- Seção após About -->
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mt-8 md:mt-0 parallax-container order-2 md:order-1">
+                        <img src="./assets/banner3.png" alt="Banner VoePRO 3" class="w-full h-auto rounded-lg shadow-xl floating-banner">
+                    </div>
+                    <div class="md:w-1/2 md:pl-12 order-1 md:order-2">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                            <span class="text-primary">Viaje com</span> 
+                            <span class="text-secondary">Conforto</span>
+                        </h2>
+                        <p class="text-gray-600 text-lg mb-6">Descubra o mundo com o máximo de conforto e segurança. Oferecemos as melhores opções para sua viagem dos sonhos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-   
+        <!-- Seção antes da Galeria -->
+        <section class="py-20 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                            <span class="text-primary">Destinos</span> 
+                            <span class="text-secondary">Incríveis</span>
+                        </h2>
+                        <p class="text-gray-600 text-lg mb-6">Explore destinos únicos e crie memórias inesquecíveis com nossas ofertas exclusivas.</p>
+                    </div>
+                    <div class="md:w-1/2 mt-8 md:mt-0 md:pl-12 parallax-container">
+                        <img src="./assets/banner5.png" alt="Banner VoePRO 4" class="w-full h-auto rounded-lg shadow-xl floating-banner">
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <!-- Gallery Section -->
-    <section id="gallery" class="py-20 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">
-                <span class="text-white">Experiências</span> 
-                <span class="text-secondary">VoePRO</span>
-            </h2>
-            <p class="text-center text-gray-600 mb-12">
-                <span class="text-secondary">Conheça</span> as histórias dos nossos viajantes
-            </p>
-            
-            <div class="instagram-grid">
-                <!-- Item 1 -->
-                <div class="instagram-item">
-                    <img src="./assets/imagem-galeria1.jpg" alt="Viagem Paris">
-                    <div class="instagram-overlay">
-                        <div class="text-white">
-                            <div class="flex items-center mb-3">
-                                <img src="avatar1.jpg" alt="Cliente" class="w-10 h-10 rounded-full mr-3">
+        <!-- Seção após a Galeria -->
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mt-8 md:mt-0 parallax-container order-2 md:order-1">
+                        <img src="./assets/banner4.png" alt="Banner VoePRO 5" class="w-full h-auto rounded-lg shadow-xl floating-banner">
+                    </div>
+                    <div class="md:w-1/2 md:pl-12 order-1 md:order-2">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                            <span class="text-primary">Experiências</span> 
+                            <span class="text-secondary">Únicas</span>
+                        </h2>
+                        <p class="text-gray-600 text-lg mb-6">Cada viagem é uma nova história para contar. Deixe-nos criar experiências memoráveis para você.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">
+                    <span class="text-white">Experiências</span> 
+                    <span class="text-secondary">VoePRO</span>
+                </h2>
+                <p class="text-center text-gray-600 mb-12">
+                    <span class="text-secondary">Conheça</span> as histórias dos nossos viajantes
+                </p>
+                
+                <div class="instagram-grid">
+                    <!-- Item 1 -->
+                    <div class="instagram-item">
+                        <img src="./assets/imagem-galeria1.jpg" alt="Viagem Paris">
+                        <div class="instagram-overlay">
+                            <div class="text-white">
+                                <div class="flex items-center mb-3">
+                                    <img src="avatar1.jpg" alt="Cliente" class="w-10 h-10 rounded-full mr-3">
+                                    <div>
+                                        <h4 class="font-semibold">Maria Silva</h4>
+                                        <p class="text-sm">Paris, França</p>
+                                    </div>
+                                </div>
+                                <p class="text-sm line-clamp-3">"Viagem incrível! A VoePRO cuidou de tudo, desde as passagens até a hospedagem. Realizar meu sonho de conhecer Paris foi ainda mais especial com todo o suporte que recebi!"</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="instagram-item">
+                        <img src="./assets/imagem-galeria2.jpg" alt="Viagem Maldivas">
+                        <div class="instagram-overlay">
+                            <div class="text-white">
+                                <div class="flex items-center mb-3">
+                                    <img src="avatar2.jpg" alt="Cliente" class="w-10 h-10 rounded-full mr-3">
+                                    <div>
+                                        <h4 class="font-semibold">João Santos</h4>
+                                        <p class="text-sm">Maldivas</p>
+                                    </div>
+                                </div>
+                                <p class="text-sm line-clamp-3">"Lua de mel perfeita! As Maldivas são um paraíso e a VoePRO tornou tudo mais fácil. Preço justo e atendimento excepcional!"</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="instagram-item">
+                        <img src="./assets/imagem-galeria3.jpg" alt="Viagem Maldivas">
+                        <div class="instagram-overlay">
+                            <div class="text-white">
+                                <div class="flex items-center mb-3">
+                                    <img src="avatar2.jpg" alt="Cliente" class="w-10 h-10 rounded-full mr-3">
+                                    <div>
+                                        <h4 class="font-semibold">João Santos</h4>
+                                        <p class="text-sm">Maldivas</p>
+                                    </div>
+                                </div>
+                                <p class="text-sm line-clamp-3">"Lua de mel perfeita! As Maldivas são um paraíso e a VoePRO tornou tudo mais fácil. Preço justo e atendimento excepcional!"</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Adicionar mais items conforme necessário -->
+                </div>
+            </div>
+
+            <!-- Modal para visualização expandida -->
+            <div class="modal" id="gallery-modal">
+                <span class="modal-close">&times;</span>
+                <div class="modal-content">
+                    <div class="grid md:grid-cols-2">
+                        <div class="aspect-square">
+                            <img src="" alt="" class="w-full h-full object-cover" id="modal-image">
+                        </div>
+                        <div class="p-6 bg-white">
+                            <div class="flex items-center mb-4">
+                                <img src="" alt="" class="w-12 h-12 rounded-full mr-4" id="modal-avatar">
                                 <div>
-                                    <h4 class="font-semibold">Maria Silva</h4>
-                                    <p class="text-sm">Paris, França</p>
+                                    <h4 class="font-semibold" id="modal-name"></h4>
+                                    <p class="text-gray-600" id="modal-location"></p>
                                 </div>
                             </div>
-                            <p class="text-sm line-clamp-3">"Viagem incrível! A VoePRO cuidou de tudo, desde as passagens até a hospedagem. Realizar meu sonho de conhecer Paris foi ainda mais especial com todo o suporte que recebi!"</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Item 2 -->
-                <div class="instagram-item">
-                    <img src="./assets/imagem-galeria2.jpg" alt="Viagem Maldivas">
-                    <div class="instagram-overlay">
-                        <div class="text-white">
-                            <div class="flex items-center mb-3">
-                                <img src="avatar2.jpg" alt="Cliente" class="w-10 h-10 rounded-full mr-3">
-                                <div>
-                                    <h4 class="font-semibold">João Santos</h4>
-                                    <p class="text-sm">Maldivas</p>
-                                </div>
+                            <div class="mb-4">
+                                <p class="text-gray-800" id="modal-description"></p>
                             </div>
-                            <p class="text-sm line-clamp-3">"Lua de mel perfeita! As Maldivas são um paraíso e a VoePRO tornou tudo mais fácil. Preço justo e atendimento excepcional!"</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="instagram-item">
-                    <img src="./assets/imagem-galeria3.jpg" alt="Viagem Maldivas">
-                    <div class="instagram-overlay">
-                        <div class="text-white">
-                            <div class="flex items-center mb-3">
-                                <img src="avatar2.jpg" alt="Cliente" class="w-10 h-10 rounded-full mr-3">
-                                <div>
-                                    <h4 class="font-semibold">João Santos</h4>
-                                    <p class="text-sm">Maldivas</p>
-                                </div>
+                            <div class="text-sm text-gray-500">
+                                <p>Viagem realizada pela VoePRO</p>
+                                <p class="mt-1" id="modal-date"></p>
                             </div>
-                            <p class="text-sm line-clamp-3">"Lua de mel perfeita! As Maldivas são um paraíso e a VoePRO tornou tudo mais fácil. Preço justo e atendimento excepcional!"</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Adicionar mais items conforme necessário -->
-            </div>
-        </div>
-
-
-
-        <!-- Modal para visualização expandida -->
-        <div class="modal" id="gallery-modal">
-            <span class="modal-close">&times;</span>
-            <div class="modal-content">
-                <div class="grid md:grid-cols-2">
-                    <div class="aspect-square">
-                        <img src="" alt="" class="w-full h-full object-cover" id="modal-image">
-                    </div>
-                    <div class="p-6 bg-white">
-                        <div class="flex items-center mb-4">
-                            <img src="" alt="" class="w-12 h-12 rounded-full mr-4" id="modal-avatar">
-                            <div>
-                                <h4 class="font-semibold" id="modal-name"></h4>
-                                <p class="text-gray-600" id="modal-location"></p>
-                            </div>
-                        </div>
-                        <div class="mb-4">
-                            <p class="text-gray-800" id="modal-description"></p>
-                        </div>
-                        <div class="text-sm text-gray-500">
-                            <p>Viagem realizada pela VoePRO</p>
-                            <p class="mt-1" id="modal-date"></p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
     <!-- Contact Section -->
     <section id="contact" class="py-20 bg-white">
@@ -379,11 +388,12 @@
                     </a>
                 </div>
             </div>
-
+        </div>
     </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="bg-primary text-white py-6">
+    <footer class="bg-primary text-white py-6 bottom-0 w-full">
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
                 <p>&copy; 2025 VoePRO. Todos os direitos reservados.</p>
