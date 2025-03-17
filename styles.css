@@ -43,8 +43,6 @@ footer {
     transition: transform 0.3s ease;
 }
 
-
-
 /* Animações */
 @keyframes fadeIn {
     from {
@@ -286,4 +284,102 @@ section.about-section h2 span.text-white {
     gap: 1rem;
     justify-content: center;
     margin-top: 1.5rem;
+}
+
+/* Ajustes para dispositivos móveis */
+@media (max-width: 640px) {
+    /* Ajustes de texto para hero section */
+    #home h1 {
+        font-size: 2.25rem;
+        line-height: 1.2;
+    }
+    
+    #home p {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    /* Garantir que o slider seja visível e proporcional */
+    .swiper {
+        height: auto;
+        width: 100%;
+    }
+    
+    .swiper-slide img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+    
+    /* Botões menores em mobile */
+    #home a.bg-secondary {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    #home a.bg-secondary i {
+        font-size: 1.1rem;
+    }
+    
+    /* Ajustar cards de promoção */
+    .promo-card h3 {
+        font-size: 1.25rem;
+    }
+    
+    .promo-card p {
+        font-size: 0.875rem;
+    }
+    
+    .promo-card .text-3xl {
+        font-size: 1.5rem;
+    }
+    
+    .promo-card a {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    /* Botão da navbar menor */
+    nav a.bg-primary {
+        padding: 0.25rem 0.75rem;
+    }
+    
+    nav a.bg-primary i {
+        font-size: 1.125rem;
+    }
+}
+
+/* Estilos para o rodapé em versão mobile */
+@media (max-width: 767px) {
+    footer {
+        padding: 1.25rem 0;
+    }
+    
+    footer .flex-col {
+        gap: 1rem;
+    }
+    
+    footer .text-sm {
+        text-align: center;
+    }
+    
+    footer .flex-wrap {
+        justify-content: center;
+        width: 100%;
+    }
+    
+    footer i {
+        font-size: 1.25rem;
+    }
+    
+    footer a.hover\:text-secondary {
+        margin: 0.25rem;
+    }
+}
+
+/* Utilitário para telas extra pequenas */
+@media (min-width: 480px) {
+    .xs\:inline {
+        display: inline;
+    }
 } 
