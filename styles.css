@@ -341,11 +341,12 @@ section.about-section h2 span.text-white {
     
     /* Botão da navbar menor */
     nav a.bg-primary {
-        padding: 0.25rem 0.75rem;
+        padding: 0.25rem 0.5rem;
+        font-size: 0.7rem;
     }
     
     nav a.bg-primary i {
-        font-size: 1.125rem;
+        font-size: 0.875rem;
     }
 }
 
