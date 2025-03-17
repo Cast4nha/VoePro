@@ -234,4 +234,56 @@ section.about-section h2 span.text-white {
 .parallax-container {
     perspective: 1000px;
     overflow: hidden;
+}
+
+/* Estilos para o popup de termos */
+.terms-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+}
+
+.terms-popup.active {
+    display: flex;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.terms-popup-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.terms-popup-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.terms-popup-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.terms-popup-content::-webkit-scrollbar-thumb {
+    background: #0052FF;
+    border-radius: 10px;
+}
+
+.terms-popup-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1.5rem;
 } 

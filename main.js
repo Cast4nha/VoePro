@@ -91,18 +91,24 @@ document.querySelectorAll('.instagram-item').forEach(item => {
 });
 
 // Fechar modal
-document.querySelector('.modal-close').addEventListener('click', () => {
-    document.getElementById('gallery-modal').classList.remove('active');
-    document.body.style.overflow = 'auto';
-});
-
-// Fechar modal ao clicar fora
-document.getElementById('gallery-modal').addEventListener('click', (e) => {
-    if (e.target === document.getElementById('gallery-modal')) {
+const modalClose = document.querySelector('.modal-close');
+if (modalClose) {
+    modalClose.addEventListener('click', () => {
         document.getElementById('gallery-modal').classList.remove('active');
         document.body.style.overflow = 'auto';
-    }
-});
+    });
+}
+
+// Fechar modal ao clicar fora
+const galleryModal = document.getElementById('gallery-modal');
+if (galleryModal) {
+    galleryModal.addEventListener('click', (e) => {
+        if (e.target === galleryModal) {
+            galleryModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    });
+}
 
 // Efeito parallax no banner
 const parallaxBanner = () => {
@@ -133,23 +139,57 @@ const parallaxBanner = () => {
 // Inicializar o efeito parallax
 parallaxBanner();
 
-// Gerenciamento do popup de termos
-document.addEventListener('DOMContentLoaded', () => {
+// Controle do popup de termos - Corrigido para garantir que o popup apareça
+document.addEventListener('DOMContentLoaded', function() {
+    // Verificar se o usuário já aceitou os termos
     const termsAccepted = localStorage.getItem('termsAccepted');
     const popup = document.getElementById('termsPopup');
     
-    if (!termsAccepted) {
+    // Se o usuário não aceitou os termos anteriormente, mostrar o popup
+    if (!termsAccepted && popup) {
+        // Mostrar o popup imediatamente
         popup.classList.add('active');
-        document.body.style.overflow = 'hidden';
+        document.body.style.overflow = 'hidden'; // Impedir rolagem da página
     }
+    
+    // Evento para aceitar os termos
+    const acceptButton = document.getElementById('acceptTerms');
+    if (acceptButton) {
+        acceptButton.addEventListener('click', function() {
+            localStorage.setItem('termsAccepted', 'true');
+            if (popup) {
+                popup.classList.remove('active');
+                document.body.style.overflow = 'auto'; // Restaurar rolagem da página
+            }
+        });
+    }
+    
+    // Evento para recusar os termos
+    const declineButton = document.getElementById('declineTerms');
+    if (declineButton) {
+        declineButton.addEventListener('click', function() {
+            alert('Você precisa aceitar os termos para continuar usando nosso site.');
+        });
+    }
+});
 
-    document.getElementById('acceptTerms').addEventListener('click', () => {
-        localStorage.setItem('termsAccepted', 'true');
-        popup.classList.remove('active');
-        document.body.style.overflow = 'auto';
+// Animações de scroll
+document.addEventListener('scroll', function() {
+    const elements = document.querySelectorAll('.animate-on-scroll');
+    
+    elements.forEach(element => {
+        if (isElementInViewport(element)) {
+            element.classList.add('animate-fade-in');
+        }
     });
+});
 
-    document.getElementById('declineTerms').addEventListener('click', () => {
-        window.location.href = 'https://www.google.com'; // Ou qualquer outra página de redirecionamento
-    });
-}); 
+function isElementInViewport(el) {
+    const rect = el.getBoundingClientRect();
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+} 

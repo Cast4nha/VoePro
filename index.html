@@ -1,575 +1,1552 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VoePRO - Agência de Viagens</title>
-    
-    <!-- Favicons -->
-    <link rel="icon" type="image/png" sizes="32x32" href="./LOGO VOEPRO/ARQUIVOS DA LOGO/SIMBOLO 3 - VOE PRO.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link rel="manifest" href="site.webmanifest">
-    <meta name="theme-color" content="#E2C700">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="styles.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#0052FF',
-                        secondary: '#E2C700',
-                        tertiary: '#003AB5',
-                    },
-                    fontFamily: {
-                        poppins: ['Poppins', 'sans-serif'],
-                    },
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>VoePRO - Agência de Viagens</title>
+
+        <!-- Favicons -->
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="./LOGO VOEPRO/ARQUIVOS DA LOGO/SIMBOLO 3 - VOE PRO.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+        <link rel="manifest" href="site.webmanifest">
+        <meta name="theme-color" content="#E2C700">
+
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="styles.css">
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            primary: '#0052FF',
+                            secondary: '#E2C700',
+                            tertiary: '#003AB5'
+                        },
+                        fontFamily: {
+                            poppins: ['Poppins', 'sans-serif']
+                        }
+                    }
                 }
             }
-        }
-    </script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            margin: 0;
-            padding: 0;
-        }
+        </script>
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+        <style>
+            body {
+                font-family: 'Poppins', sans-serif;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                margin: 0;
+                padding: 0;
+            }
 
-        footer {
-            margin-top: auto;
-        }
+            footer {
+                margin-top: auto;
+            }
 
-        /* Estilos para o popup de termos */
-        .terms-popup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 9999;
-            align-items: center;
-            justify-content: center;
-        }
+            /* Estilos para o popup de termos */
+            .terms-popup {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                z-index: 9999;
+                align-items: center;
+                justify-content: center;
+            }
 
-        .terms-popup.active {
-            display: flex;
-        }
+            .terms-popup.active {
+                display: flex;
+                animation: fadeIn 0.3s ease-out;
+            }
 
-        .terms-popup-content {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            max-width: 600px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-            position: relative;
-        }
+            .terms-popup-content {
+                background: white;
+                padding: 2rem;
+                border-radius: 12px;
+                max-width: 800px;
+                width: 90%;
+                max-height: 85vh;
+                overflow-y: auto;
+                position: relative;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            }
 
-        .terms-popup-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-top: 1.5rem;
-        }
+            .terms-content {
+                max-height: 60vh;
+                overflow-y: auto;
+                padding-right: 1rem;
+            }
 
-        .swiper {
-            width: 100%;
-            height: 100%;
-        }
+            .terms-content::-webkit-scrollbar,
+            .terms-popup-content::-webkit-scrollbar {
+                width: 8px;
+            }
 
-        .swiper-slide {
-            text-align: center;
-            background: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+            .terms-content::-webkit-scrollbar-track,
+            .terms-popup-content::-webkit-scrollbar-track {
+                background: #f1f1f1;
+                border-radius: 10px;
+            }
 
-        .swiper-slide img {
-            display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+            .terms-content::-webkit-scrollbar-thumb,
+            .terms-popup-content::-webkit-scrollbar-thumb {
+                background: #0052FF;
+                border-radius: 10px;
+            }
 
-        .promo-card {
-            background: white;
-            border-radius: 1rem;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
+            .terms-popup-buttons {
+                display: flex;
+                gap: 1rem;
+                justify-content: center;
+                margin-top: 1.5rem;
+            }
 
-        .promo-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-    </style>
-</head>
-<body class="bg-white">
-    <!-- Popup de Termos -->
-    <div class="terms-popup" id="termsPopup">
-        <div class="terms-popup-content">
-            <h2 class="text-2xl font-bold mb-4 text-primary">Termos de Uso</h2>
-            <p class="mb-4 text-gray-600">
-                Antes de continuar navegando em nosso site, gostaríamos de informar que ao utilizar nossos serviços, 
-                você concorda com nossos termos de uso.
-            </p>
-            <div class="text-center mb-6">
-                <a href="./assets/TERMOS DE USO - CONDICOES - PRIVACIDADE.pdf" 
-                   target="_blank"
-                   class="text-center text-primary hover:text-secondary transition-colors duration-300 inline-flex flex-col items-center">
-                    <i class="fas fa-file-pdf text-2xl mb-2"></i>
-                    <span class="block">Ler Termos de Uso</span>
-                </a>
-            </div>
-            <div class="terms-popup-buttons">
-                <button id="declineTerms" 
-                        class="px-6 py-2 bg-gray-300 text-gray-700 rounded-full hover:bg-gray-400 transition">
-                    Recusar
-                </button>
-                <button id="acceptTerms" 
-                        class="px-6 py-2 bg-primary text-white rounded-full hover:bg-opacity-90 transition">
-                    Aceitar e Continuar
-                </button>
+            .swiper {
+                width: 100%;
+                height: 100%;
+            }
+
+            .swiper-slide {
+                text-align: center;
+                background: #fff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .swiper-slide img {
+                display: block;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .promo-card {
+                background: white;
+                border-radius: 1rem;
+                overflow: hidden;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            }
+
+            .promo-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            }
+        </style>
+    </head>
+    <body class="bg-white">
+        <!-- Popup de Termos -->
+        <div class="terms-popup" id="termsPopup">
+            <div class="terms-popup-content">
+                <h2 class="text-2xl font-bold mb-4 text-primary">Termos de Uso</h2>
+                <div class="terms-content text-gray-600 text-justify text-sm mb-6">
+                    <p class="mb-4 font-bold">TERMOS E CONDIÇÕES GERAIS DE USO; POLÍTICAS DE
+                        PRIVACIDADE E DEMAIS DOCUMENTOS INCORPORADOS AOS MESMO POR REFERÊNCIA</p>
+                    <p>Ao utilizar os nossos serviços, você concorda com estas condições
+                        estabelecidas. Estes termos e condições são complementares às nossas Políticas
+                        de Proteção de Dados, por isso, caso não concorde com estas condições, não
+                        utilize os serviços da VoePro. Antes de realizar cadastro em nosso website, o
+                        usuário deve ler atenciosamente e certificar-se de haver compreendido e aceito
+                        todas as condições estabelecidas nos Termos e Condições Gerais de Uso, Políticas
+                        de Privacidade e demais documentos incorporados aos mesmos por referência. O
+                        denominado o(a) CONTRATANTE, tomador de serviços através do site voepro.com.br,
+                        da denominada CONTRATADA, VOEPRO, pessoa jurídica inscrita sob CNPJ nº xxx,
+                        sediada na ...</p>
+                    <h3 class="text-lg font-semibold text-primary mt-4 mb-2">1. QUEM SOMOS</h3>
+                    <p>1.1. A VoePro emprega seus melhores esforços para que os seus clientes tenham
+                        uma viagem inesquecível. Trabalhamos diariamente para transformar a experiência
+                        na melhor conquista da sua vida, através de uma ampla rede de produtos e
+                        serviços turísticos. 1.2. Atua como plataforma de intermediação de venda on-line
+                        de passagens e reservas de hospedagem. Também disponibiliza sua plataforma para
+                        quem quer vender suas milhas para emissão de passagens aéreas e para usuários
+                        que tenham interesse em adquirir passagens por tarifa emitida através de milhas
+                        ou convencional, efetuando a intermediação da solicitação do hóspede junto aos
+                        serviços de hospedagem ou passageiro junto às Companhias Aéreas. 1.3. Por
+                        realizar apenas a intermediação do serviço, a VoePro não tem ingerência nas
+                        condições particulares estabelecidas por cada Fornecedor, Companhia Aérea,
+                        Prestadores de Serviços de Hospedagens, não podendo assim alterar as regras ou
+                        arcar com quaisquer responsabilidades delas decorrentes.</p>
+                    <!-- Inserir texto aqui -->
+
+                    <h3 class="text-lg font-semibold text-primary mt-4 mb-2">2. DO OBJETO DO CONTRATO</h3>
+                    <p>2.1. O serviço objeto dos presentes Termos e Condições Gerais consistem em: I
+                        - Emissão de passagens por milhas aéreas/pontos de programas de fidelidade de
+                        terceiros, a serem adquiridas pelo usuário através do site voepro.com. II - A
+                        VoePro possibilita, portanto, que usuários adquiram passagens aéreas emitidas
+                        através de milhas, na qualidade de fornecedor dessas milhas. 2.2. A VoePro é
+                        responsável tão somente pelo cumprimento dos serviços citados nesses termos, não
+                        lhe sendo imputável qualquer responsabilidade por alterações de horários, rotas
+                        e/ou conexões (tanto na ida como na volta), atrasos, greves, e demais eventos de
+                        força maior, assim como perda ou irregularidade que venha a ocorrer por culpa de
+                        terceiros. 2.3. O contrato a que se refere é de caráter único e intransferível.
+                        2.4. As promoções estão sujeitas a disponibilidade e podem ser encerradas ou
+                        modificadas a qualquer momento, sem aviso prévio. A VoePro reserva-se o direito
+                        de recusar, anular ou restringir a aplicação de qualquer promoção se houver
+                        suspeita de abuso, fraude, violação destes termos ou qualquer outra atividade
+                        considerada inadequada.</p>
+                    <!-- Inserir texto aqui -->
+
+                    <h3 class="text-lg font-semibold text-primary mt-4 mb-2">3. SEGURO</h3>
+                    <p>3.1. O serviço de seguro-viagem é fornecido por uma empresa especializada no
+                        mercado segurador. Para a emissão do seguro solicitado, os dados pessoais do
+                        contratante e/ou dos passageiros serão compartilhados com a referida empresa.
+                        3.2. Os benefícios do seguro-viagem são detalhadamente informados antes da
+                        contratação do serviço, bem como constam no seguro emitido. 3.3. O atendimento
+                        da Central de Assistência é realizado diretamente pela seguradora responsável,
+                        cujos dados de contato estão indicados na apólice e na seção "Minhas Viagens" da
+                        plataforma. 3.4. i. O cancelamento do Seguro só poderá ser realizado em conjunto
+                        com o cancelamento da passagem aérea. Para voos com data de embarque em até 7
+                        (sete) dias a partir da emissão, o cancelamento deverá ser solicitado em até 20
+                        (vinte) horas após a emissão do bilhete de ida. ii. Para voos com data de
+                        embarque superior a 7 (sete) dias, o cancelamento poderá ser solicitado até 48
+                        (quarenta e oito) horas antes da data de embarque, garantindo o reembolso
+                        integral do valor pago. iii. Após esses prazos, não será possível solicitar o
+                        cancelamento do Seguro. 3.5. Caso a emissão das passagens aéreas não seja
+                        confirmada, o valor pago pelo seguro-viagem será reembolsado integralmente. 3.6.
+                        Em caso de alteração involuntária da passagem aérea pela companhia aérea, se o
+                        cliente optar por remarcar o voo para uma data diferente da original, o valor do
+                        Seguro poderá ser ajustado. As alterações de valor podem ocorrer devido a
+                        mudanças na duração da viagem e/ou na faixa etária do passageiro no momento da
+                        nova emissão. Qualquer diferença de valor será informada previamente ao cliente
+                        antes da confirmação da remarcação.</p>
+                    <!-- Inserir texto aqui -->
+
+                    <h3 class="text-lg font-semibold text-primary mt-4 mb-2">4. SERVIÇOS DE HOSPEDAGEM</h3>
+                    <p>4.1. Ao selecionar uma oferta de hospedagem, você concorda em pagar todas as
+                        taxas relacionadas a este serviço, incluindo o preço da diária, taxas
+                        aplicáveis, como a de serviço da VoePro, em alguns momentos poderá ser cobrado o
+                        depósito da taxa de segurança, ou taxas à ser pagas na acomodação ante as
+                        exigências do hotel selecionado, informações que constam detalhadas em nossa
+                        plataforma. 4.2. Em alguns tipos de hospedagem, você terá a opção de pedir
+                        desconto sobre o valor que irá pagar por sua estadia. Neste caso, não são
+                        geradas reservas, trata-se tão somente de uma análise junto ao hotel que deseja
+                        se hospedar. Assim, a plataforma correspondente irá intermediar a viabilidade
+                        dos descontos. 4.3. Para os casos de pedido de desconto, os procedimentos para
+                        validação serão informados no momento que você registrar sua solicitação. Para
+                        estes casos, escolha um período de hospedagem superior a 48 horas do prazo de
+                        análise do seu pedido de desconto. 4.4. Ao possuir uma reserva e decidir
+                        permanecer no local após a data do checkout, a empresa proprietária da
+                        hospedagem, dos serviços, poderá requerer a sua saída, de acordo com a
+                        legislação local, inclusive impondo penalidades pela permanência em excesso.</p>
+                    <!-- Inserir texto aqui -->
+
+                    <h3 class="text-lg font-semibold text-primary mt-4 mb-2">5. PACOTES</h3>
+                    <p>5.1. A VoePro realiza tão somente a intermediação de serviços de turismo os
+                        quais são executados por terceiros (transportadoras aéreas, marítimas,
+                        rodoviárias, hotéis, restaurantes, locadoras de veículos, agência de viagens,
+                        dentre outras). 5.2. As regras de reservas, cancelamentos e alterações são
+                        regidos por cada tipo de serviço contratado.</p>
+                    <!-- Inserir texto aqui -->
+
+                    <h3 class="text-lg font-semibold text-primary mt-4 mb-2">6. VENDA DE MILHAS</h3>
+                    <p>6.1. Para utilizar os serviços de uso da plataforma para a venda de milhas, é
+                        necessário seguir as orientações disponíveis na página da voepro.com.br. 6.2.
+                        Você está ciente e é de sua exclusiva responsabilidade observar o regulamento e
+                        seu limite de emissões junto ao seu programa de fidelidade, bem como você
+                        autoriza a VoePro a usar as milhas disponibilizadas para emissões de passagens
+                        aéreas e realizar a gestão de remarcações ou cancelamentos destas no programa de
+                        fidelidade. 6.3. As modalidades de intermediação e prazos de pagamentos de venda
+                        de milhas estarão disponíveis/informadas no momento em que você realizar a
+                        oferta. 6.4. Após a sua escolha da modalidade de venda, a VoePro irá proceder a
+                        análise, limitação do valor do milheiro quando for o caso e será necessário a
+                        aprovação da VoePro para a conclusão da oferta. 6.5. Ao utilizar a plataforma da
+                        VoePro para a venda de milhas, a análise de sua oferta é realizada em até 48
+                        horas úteis, podendo ser prorrogado por igual período caso ocorra instabilidade
+                        de seu programa de fidelidade ou da VoePro. 6.6. Ao ser constatado falta ou
+                        inconsistências de dados na VoePro e em seu programa de fidelidade, bem como
+                        incoerência de quantidade de milhas, ou quaisquer fatores que impossibilitem a
+                        aprovação de sua oferta, esta será reprovada e, poderá ser excluída e/ou será
+                        necessário que você refaça a oferta ou que corrija todos os dados necessários.
+                        6.7. A VoePro não se responsabiliza por cadastro de milhas prestes a vencer, por
+                        isso você precisa observar a validade destas durante o período em que sua oferta
+                        estiver ativa na VoePro, venda de todas as respectivas milhas e durante todo o
+                        período de uso desta, isso inclui até o uso final pelo(s) passageiro(s). Pois ao
+                        ocorrer qualquer modificação das passagens emitidas por estas, o passageiro
+                        poderá realizar solicitações que são analisadas pelas VoePro, conforme regras da
+                        respectiva companhia aérea, do tipo de tarifa selecionada, e do determinado
+                        nestes termos. 6.8 A VoePro ainda se reserva no direito de: (i) cancelar sua
+                        negociação ao não conseguir utilizar as milhas objetos da transação comercial;
+                        (ii) em caso de saldo remanescente que seja impossível a utilização será abatido
+                        do valor à pagar ou caso tiver uma nova venda em andamento, as milhas ou valores
+                        poderão ser utilizadas ou abatidas; (iii) Se sua negociação já tiver sido paga,
+                        a VoePro irá solicitar a devolução do valor. (iv) O não adimplemento desta
+                        obrigação poderá acarretar a cobrança do débito e a consequente negativação do
+                        seu cadastro nos órgãos de proteção ao crédito. 6.9. Após a aprovação da sua
+                        oferta de milhas, caso você desista da venda, o cancelamento só será possível se
+                        não acarretar nenhum prejuízo às partes envolvidas. Neste caso, a exclusão da
+                        sua oferta deve ser feita por você no
+                        https://www.maxmilhas.com.br/cliente/minhas-ofertas. Se a VoePro já tiver
+                        emitido uma ou mais passagens e/ou tiver feito o pagamento das milhas, não será
+                        possível desistir da oferta ou realizar uma posterior alteração de preço da
+                        oferta.</p>
+                    <!-- Inserir texto aqui -->
+
+                    <h3 class="text-lg font-semibold text-primary mt-4 mb-2">7. DA NATUREZA DOS SERVIÇOS CONTRATADOS</h3>
+                    <p>7.1. A atividade empresarial da VoePro é a de intermediação remunerada entre
+                        fornecedores e consumidores de serviços turísticos, bem como as atividades
+                        complementares a esses serviços, relacionados, genericamente, no Decreto
+                        5406/2005 e na cláusula 2 acima. A VoePro, para tanto, relaciona os prestadores
+                        de serviços, legalmente habilitados e sugere a contratação daqueles que melhor
+                        se adequam às necessidades e condições financeiras do CLIENTE e efetua a
+                        contratação dos serviços por sua conta e ordem.</p>
+                    <!-- Inserir texto aqui -->
+
+                    <h3 class="text-lg font-semibold text-primary mt-4 mb-2">8. DA CAPACIDADE PARA REGISTRA-SE</h3>
+                    <p>8.1. Os serviços da VoePro são disponibilizados apenas para pessoas com
+                        capacidade legal para contratá-los. Menores de idade ou usuários inabilitados
+                        por desrespeitarem os termos e práticas estabelecidos nestes Termos e Condições
+                        Gerais de Uso e Políticas de Privacidade e Demais Documentos Incorporados aos
+                        mesmo por Referência, 8.2. estão inaptos a utilizar nossos serviços. Não é
+                        permitido, também, que uma mesma pessoa realize mais de um cadastro em nosso
+                        website. Caso cadastros duplicados sejam detectados, ambos serão definitivamente
+                        inabilitados. 8.3. Pessoas Jurídicas poderão cadastrar-se por seus
+                        representantes legais, devendo no momento do cadastro informar os dados do
+                        mesmo, além das informações solicitadas no formulário sobre a empresa.</p>
+                    <!-- Inserir texto aqui -->
+
+                    <h3 class="text-lg font-semibold text-primary mt-4 mb-2">9. DO CADASTRO</h3>
+                    <p>9.1. O cadastro do usuário em potencial será confirmado apenas após o
+                        preenchimento de todos os campos obrigatórios apresentados no formulário. 9.2.
+                        As informações inseridas no cadastro devem ser exatas, precisas e autênticas,
+                        sendo o usuário responsável e apto a responder civil e criminalmente pela
+                        veracidade desses dados. O usuário também assume o compromisso de manter
+                        atualizadas essas informações sempre que necessário. 9.3. Nos reservamos o
+                        direito de utilizar os meios possíveis para identificar nossos usuários, bem
+                        como de solicitar dados adicionais e documentos que consideremos ser pertinentes
+                        para verificação dos dados informados. Caso sejam identificados dados
+                        inverídicos ou caso o usuário se negue a disponibilizar os documentos
+                        requeridos, a VoePro poderá realizar o bloqueio do cadastro para utilização de
+                        nossos serviços, suspender temporariamente ou cancelar definitivamente o
+                        registro, sem prejuízo de outras medidas que julgar necessárias. 9.4. Em caso de
+                        aplicação de qualquer sanção referida acima, imediatamente serão cancelados os
+                        serviços ofertados ao usuário, não cabendo à mesmo qualquer sorte de indenização
+                        ou ressarcimento. 5.5. O usuário irá acessar sua conta através de e-mail (login)
+                        e senha previamente registrados por ele e compromete-se a não informar esses
+                        dados a terceiros, sendo integralmente responsável pelo uso que deles seja
+                        feito. 5.6. O usuário compromete-se a notificar a VoePro imediatamente, através
+                        de nossos canais de atendimento, a respeito de qualquer uso não autorizado de
+                        sua conta. O usuário será o único responsável pelas operações realizadas em sua
+                        conta, uma vez que o acesso à mesma só será possível mediante inserção da senha,
+                        cujo conhecimento é exclusivo do usuário. 9.7. Em hipótese alguma será permitida
+                        a cessão, venda, aluguel ou outra forma de transferência de conta a terceiros.
+                        9.8. O login que o usuário determinar para ser utilizado na VoePro não poderá
+                        ter semelhança com o nome VoePro. Nos reservamos o direito de recusar qualquer
+                        solicitação de cadastro e de cancelar um cadastro previamente aceito, desde que
+                        esteja em desacordo com as políticas e regras do presente termo.</p>
+                    <!-- Inserir texto aqui -->
+
+                    <h3 class="text-lg font-semibold text-primary mt-4 mb-2">10. DA MODIFICAÇÕES DOS
+                        TERMOS E CONDIÇÕES GERAIS DE USO; POLÍTICAS DE PRIVACIDADE E DEMAIS DOCUMENTOS
+                        INCORPORADOS AOS MESMO POR REFERÊNCIA</h3>
+                    <p>10.1. Estes termos poderão sofrer alterações a qualquer tempo, visando seu
+                        aprimoramento e melhoria dos serviços prestados pela VoePro. Os novos Termos e
+                        Condições entrarão em vigor 15 (quinze) dias após serem publicados no site. No
+                        prazo de 7 (sete) dias contados a partir da publicação das modificações, o
+                        usuário deverá comunicar-se por e-mail caso esteja em desacordo os termos
+                        alterados. Nesse caso, o vínculo contratual deixará de existir, desde que não
+                        haja contas ou dívidas em aberto. Não havendo manifestação no prazo estipulado,
+                        fica definido que o usuário aceitou os novos Termos e Condições e o contrato
+                        permanecerá em vigor entre as partes. 10.2. Novas alterações não vigorarão em
+                        relação a transações e anúncios já iniciados antes das mesmas serem publicadas.
+                        Nestes casos, os Termos e Condições Gerais de Uso do Site valerão com a redação
+                        anterior.</p>
+                    <!-- Inserir texto aqui -->
+
+                    <h3 class="text-lg font-semibold text-primary mt-4 mb-2">11. DAS OBRIGAÇÕES</h3>
+                    <p>11.1. Obrigações do usuário: 11.1.1. O usuário declara ter ciência de que
+                        o(s) bilhete(s) aéreo(s) adquirido(s) com a VoePro foram emitidos com a
+                        utilização de milhas aéreas/pontos de programas de fidelidade de terceiros, e
+                        que, em decorrência desta forma de emissão, a fruição do bilhete não terá o
+                        condão de acumular pontuação nos programas de fidelidade de titularidade do
+                        usuário. 11.1.2. O usuário compromete-se a realizar o pagamento total do pedido
+                        utilizando meios lícitos, para que a transação seja efetivada. O não cumprimento
+                        das obrigações citadas neste parágrafo, implica no cancelamento do pedido ou a
+                        suspensão ou bloqueio do cadastro do usuário 11.1.3. Os bilhetes eletrônicos
+                        adquiridos estão sujeitos a regras específicas de cancelamento e crédito
+                        determinadas pela VoePro. 11.1.4. As ofertas objeto do presente contrato só
+                        terão validade se realizadas por meio do sistema da VoePro. 11.1.5. O(a)
+                        CONTRATANTE deverá informar no momento da reserva se possui alguma condição
+                        clínica que possa comprometer sua atividade, como: doenças cardíacas,
+                        pulmonares, labirintite e outras. Quaisquer consequências decorrentes de doenças
+                        crônicas não são responsabilidade da CONTRATADA.</p>
+                    <!-- Inserir texto aqui -->
+
+                    <h3 class="text-lg font-semibold text-primary mt-4 mb-2">12. DOS DOCUMENTOS NECESSÁRIOS AO EMBARQUE</h3>
+                    <p>11.2.1. A VoePro se compromete a prestar seus serviços sempre de forma
+                        transparente, a disponibilizar equipes de profissionais competentes e
+                        experientes e a cumprir os prazos e condições estabelecidos no presente
+                        instrumento. 11.2.2. A inexecução da prestação acordada em decorrência de fato
+                        não imputável a VoePro e cujos efeitos não seriam possíveis de evitar ou impedir
+                        (caso fortuito ou força maior), a VoePro não poderá responder pelos danos
+                        causados ao usuário. 11.2.3. Uma vez efetuado o pedido de emissão da passagem
+                        aérea, a VoePro não garante a reserva da passagem, a disponibilidade, o preço em
+                        milhas ofertado e nem a emissão do bilhete. Garantimos o voo do usuário apenas
+                        após a confirmação do pedido de emissão de passagens e consequente conclusão
+                        total do pedido de compras. 11.2.4. No caso específico de pagamento realizado
+                        com boleto parcelado, mesmo com a passagem já emitida e de posse do cliente, o
+                        voo do usuário só estará garantido após a quitação de todas as parcelas
+                        restantes. 11.2.5. Em que pese à responsabilidade definida nestas condições
+                        gerais, a VoePro não é responsável por atrasos, greves, antecipações de
+                        horários, condições atmosféricas, catástrofes naturais, decisões governamentais,
+                        atos de terrorismo, roubos e furtos, bem como outros motivos de força maior ou
+                        casos fortuitos, sendo os possíveis gastos pessoais decorrentes de tais
+                        circunstâncias, de responsabilidade do CONTRATANTE. 11.2.6. A programação poderá
+                        sofrer alterações, remarcações ou cancelamentos, a exclusivo critério da VoePro,
+                        por motivo de força maior, tais como condições climáticas adversas, mudanças de
+                        horário dos atrativos previstos, alterações abruptas de valores de parceiros
+                        locais, bloqueio de rodovias, mudança política ou econômica do Governo ou outros
+                        casos em que a CONTRATADA julgue interferir na segurança ou bem-estar dos demais
+                        passageiros.</p>
+                    <!-- Inserir texto aqui -->
+
+                    <h3 class="text-lg font-semibold text-primary mt-4 mb-2">13. DA BAGAGEM</h3>
+                    <p>12.1. Em viagens pelo Brasil é obrigatório estar portando RG original e em
+                        bom estado durante toda a viagem. Para crianças até 11 anos, o RG poderá ser
+                        substituído pela certidão de nascimento original. Estrangeiros viajando pelo
+                        Brasil devem estar portando o seu Passaporte original. 12.2. Em viagens
+                        internacionais (fora do Brasil) é obrigatório estar portando Passaporte válido
+                        durante toda a viagem, mesmo para crianças de qualquer idade. Alguns países do
+                        Mercosul (como por exemplo Argentina, Chile, Uruguay) aceitam o RG original como
+                        documento migratório, podendo nestes casos então, o Passaporte ser substituído
+                        pelo RG original (tanto para adultos quanto para crianças), desde que o RG
+                        esteja em bom estado e seja recente (condizendo a foto com a fisionomia atual do
+                        viajante). 12.3. VISTOS: muitos países exigem que brasileiros possuam vistos
+                        para entrarem no país. A responsabilidade pela validade do passaporte, obtenção
+                        dos vistos, bem como os pagamentos das taxas envolvidas são de inteira
+                        responsabilidade dos passageiros. E esse deve ser obtido em tempo hábil para o
+                        embarque. A obtenção do visto não garante a entrada no país de destino. No caso
+                        de ter sua entrada negada pelas autoridades de imigração, não haverá reembolso
+                        pela não utilização dos serviços previamente contratados. Crianças também
+                        necessitam de vistos. Muita atenção em viagens marítimas, pois o porto de
+                        embarque pode não necessitar de visto, mas os portos de paradas (visitas) podem
+                        ser em países que necessitem de vistos. 12.4. VACINAS: muitos países exigem que
+                        o viajante tome determinadas vacinas com determinada antecedência. Além de tomar
+                        a vacina, o viajante deve internacionalizar a sua carteira de vacinação. O
+                        viajante deve obter a informação correta e atual de cada país, entrando
+                        diretamente em contato com seu consulado. É de responsabilidade do contratante
+                        respeitar todos os protocolos sanitários. 12.5. Autorizações para menores
+                        desacompanhados viajando fora do Brasil ou em cruzeiros marítimos (mesmo que na
+                        costa brasileira): menores de 18 anos de idade em conformidade com o artigo 84
+                        do Estatuto da Criança e do Adolescente, a autorização judicial não será
+                        necessária quando a criança ou adolescente estiver acompanhada de ambos os pais,
+                        guardião ou tutor. Quando viajar em companhia de apenas um dos pais, o outro
+                        deverá autorizar por escrito, com firma reconhecida. Em qualquer outra hipótese,
+                        a autorização judicial é imprescindível. Importante: essa autorização é para
+                        sair do Brasil; países como os Estados Unidos, a maioridade é de 21 anos.
+                        12.5.1. autorizações para menores desacompanhados viajando dentro do Brasil:
+                        crianças de 0 a 16 anos incompletos desde que acompanhadas de guardião, tutor ou
+                        parentes, como pai ou mãe, avós, bisavós, irmãos, tios ou sobrinhos maiores de
+                        18 anos, portando documentação original com foto para comprovação do parentesco
+                        não precisam de autorização judicial para viajar. Se não houver parentesco entre
+                        a criança e o acompanhante, este deverá apresentar uma autorização escrita,
+                        assinada pelo pai ou pela mãe, pelo guardião ou tutor, com firma reconhecida por
+                        autenticidade ou semelhança expedido na cidade de embarque constando: Data e
+                        trecho de ida e retorno (se for o caso), bem como o nome e parentesco da pessoa
+                        responsável pelo menor no momento do embarque e do desembarque. Para menores de
+                        5 anos incompletos as Cias Aéreas não transportam desacompanhados de um
+                        responsável. 12.6. vouchers: este contrato / recibo não vale como documento para
+                        embarque aéreo, marítimo ou terrestre. Nem tampouco para hospedagem em hotéis ou
+                        utilização de outros serviços contratados. Para utilização dos serviços
+                        contratados neste recibo o viajante deverá retirar na agência com 1 (um) dia
+                        útil de antecedência a data de embarque, os documentos necessário como bilhetes
+                        aéreos, vouchers, entre outros, conferindo os mesmos. 12.7. O(a) CONTRATANTE
+                        declara estar ciente que a VoePro e os fornecedores dos serviços mencionados
+                        nesse recibo ficam isentos de quaisquer despesas que venham à ocorrer durante a
+                        viagem e/ou o não embarque dos passageiros descritos nesse recibo, devido à
+                        falta da documentação acima descrita. Estou ciente de que a VoePro não tem
+                        qualquer tipo de responsabilidade na minha situação migratória no(s) país(es) a
+                        serem visitados, não se responsabiliza por problemas em caso de deportação de
+                        passageiros e nenhum valor será ressarcido caso isto ocorra. 13. DA BAGAGEM 13.1
+                        Confira as regras e limites de sua bagagem junto a modalidade de transporte
+                        escolhida, bem como ao transportar animais de estimação lembre-se de conferir
+                        todas as exigências para acomodação, despacho, vacinas, entre as mais variadas
+                        regras, à depender do destino, conexão e até hotéis que você escolher. i. Na
+                        hipótese de extravio ou eventuais danos em sua bagagem ou na dos passageiros
+                        constantes em seu cadastro, a pessoa titular da bagagem deverá apresentar, no
+                        ato do sinistro, reclamação ao meio de transporte responsável. 13.3. Confira com
+                        o local de sua hospedagem as regras para guardar sua bagagem, ou o que pode ser
+                        mantido no quarto, como disponibilidade de cofres, bens de valores e consumo.
+                        13.4. O CONTRATANTE redime a empresa nos casos de esquecimento de bagagens ou
+                        outros pertences nos hotéis, restaurantes, e transporte por parte do passageiro,
+                        não podendo ser responsabilizada civil ou penalmente.</p>
+                    <!-- Inserir texto aqui -->
+
+                    <h3 class="text-lg font-semibold text-primary mt-4 mb-2">14. DA APRESENTAÇÃO NO AEROPORTO E/OU NA HOSPEDAGEM</h3>
+                    <p>14.1 Você deverá estar no dia previsto e no horário indicado na sua
+                        documentação de viagem ou nos horários alterados pela respectiva companhia
+                        aérea. Lembre-se de se atentar ao horário do local de seu destino e/ou conexão.
+                        i. ii. Aconselhamos se apresentar no aeroporto com antecedência ao horário
+                        previsto para seu embarque, para voos domésticos com no mínimo duas horas e para
+                        voos internacionais no mínimo três horas, também não deixe de conferir junto à
+                        companhia aérea escolhida as formas e regras para seu check in. O atraso ou não
+                        comparecimento seu e/ou dos passageiros/hóspedes constantes em seu cadastro para
+                        embarcar e/ou se hospedar será configurado no show. Nestes casos a companhia
+                        aérea e/ou hotel escolhido poderá cancelar suas reservas e não terá o direito de
+                        reembolso total ou parcial dos valores.</p>
+                    <!-- Inserir texto aqui -->
+
+                    <h3 class="text-lg font-semibold text-primary mt-4 mb-2">15. IMPOSSIBILIDADE DO ACÚMULO DE PONTOS</h3>
+                    <p>15.1. Você declara ter ciência de que a(s) passagem(s) adquiridas por
+                        intermédio da VoePro podem ser emitidas com a utilização de milhas aéreas/pontos
+                        de programas de fidelidade de terceiros que permitiram tal ato. Assim, o uso
+                        deste tipo de passagem não irá gerar possibilidade de acumular pontuação nos
+                        programas de fidelidade.</p>
+                    <!-- Inserir texto aqui -->
+
+                    <h3 class="text-lg font-semibold text-primary mt-4 mb-2">16. DA FORMA DE PAGAMENTO</h3>
+                    <p>16.1. Serviços de Passagens Aéreas, Hospedagem e Pacotes. 16.1.1. Os preços e
+                        formas de pagamentos são disponibilizados em cada serviço no nosso site
+                        voepro.com.br ou nas plataformas de direcionamentos sempre que advindas de nossa
+                        página oficial. 16.1.2 Considerando os serviços de intermediação de emissão de
+                        passagens aéreas e de reservas de hospedagens, nos termos do artigo 27 da Lei nº
+                        11.771/2008, as notas fiscais da VoePro serão emitidas nos valores de suas
+                        respectivas taxas de intermediação, diretamente ao comprador da passagem aérea.
+                        16.1.3 Caso possua crédito ou cupons para uso na plataforma da VoePro este não
+                        será cumulativo com outras modalidades de descontos e/ou cupons promocionais, ou
+                        seja, devem ser utilizados de forma unitária, dentro das regras e da respectiva
+                        validade. 16.2. Venda de milhas 16.2.1. O prazo e as formas de pagamentos da
+                        venda de suas milhas serão disponibilizados no momento da conclusão da oferta.
+                        16.2.2. A venda de suas milhas poderá ser feita de forma parcial, para uma ou
+                        mais passagens. 16.2.3. A depender da modalidade de venda escolhida por você e
+                        as regras destas, se as emissões acontecerem de forma parcial, seu pagamento
+                        poderá ser feito em datas diferentes, levando em consideração a data de cada
+                        emissão e o prazo informado no momento do cadastro da oferta. Cada pagamento
+                        será proporcional à quantidade de milhas utilizada para emitir a passagem.
+                        16.2.4 Se no final da emissão de todas as passagens houver sobra de milhas, a
+                        VoePro não arcará com a quantidade não utilizada no serviço de intermediação de
+                        emissão de passagens aéreas. Caso essa sobra já tenha sido paga, a VoePro poderá
+                        solicitar a devolução deste valor. 16.2.5. Se a VoePro realizar a intermediação
+                        de emissão de passagens para terceiros utilizando suas milhas ofertadas, estas
+                        serão pagas por transferência bancária ou Pix, nos bancos listados no momento de
+                        seu cadastro da oferta de milhas, a qual deverá colidir com a titularidade de
+                        seu login na VoePro e no programa de fidelidade. 16.2.6. Se você informar dados
+                        bancários errados, o prazo de pagamento passará a contar somente após a
+                        regularização destes dados, sem a aplicabilidade de juros, correções ou multa,
+                        pelo atraso gerado. É necessário que os novos dados de pagamento sigam as mesmas
+                        regras de titularidade de conta, tipo de conta, instituições bancárias e demais
+                        regras que estiverem vigentes no cadastro da oferta e/ou no momento da
+                        atualização dos dados bancários previamente à programação de seu pagamento.</p>
+                    <!-- Inserir texto aqui -->
+
+                    <h3 class="text-lg font-semibold text-primary mt-4 mb-2">17. CANCELAMENTOS E ALTERAÇÕES DE SERVIÇOS</h3>
+                    <p>17.1. Regras Gerais 17.1.1. Os cancelamentos e alterações dos serviços estão
+                        sujeitos às regras específicas expostas na oferta ou mesmo ante as exigências
+                        das companhias aéreas, programas de fidelidade, fornecedores de serviços de
+                        hospedagem entre outros fornecedores que você estiver adquirindo os serviços.
+                        17.1.2. Não serão considerados válidos os pedidos de cancelamentos ou alterações
+                        enviados por e-mail, via chat, entre outros fluxos, exceto o realizado pelo
+                        próprio Titular de Cadastro na área de acesso deste. 17.1.3. Ao ser constatada a
+                        suspensão de pagamentos no cartão utilizado na compra, caso tenha sido emitido
+                        quaisquer dos serviços a se concretizar, estes serão imediatamente cancelados.
+                        Em nada obstará a sua responsabilidade ante aos prestadores de serviços e a
+                        VoePro aos casos que sejam inviáveis os cancelamentos sem cobranças de
+                        taxas/prejuízos. 17.1.4. A não apresentação de algum dos documentos descritos no
+                        item 4 deste contrato acarretará a impossibilidade de embarque e a imediata
+                        rescisão do contrato, sem a devolução de qualquer quantia já paga para a
+                        CONTRATADA. 17.1.5. Caso o cartão de crédito usado por você ou por terceiro em
+                        seu login de cadastro seja cancelado ou suspenso e impacte na efetivação de um
+                        ou mais pagamentos dos serviços que houve a conclusão da intermediação pela
+                        VoePro, você deverá entrar em contato conosco o quanto antes para regularização
+                        esse débito, inclusive das nossas taxas de serviços uma vez que a intermediação
+                        foi realizada. 17.1.6. Se você emitir uma alerta de suspensão de pagamento em
+                        que os serviços que contratou ainda estejam ativos, os titulares destes serviços
+                        e quando for possível pela VoePro, por medida de segurança, poderá ser cancelado
+                        de imediato tais serviços o que refletirá um total prejuízo seja do que
+                        contratou bem como de nossa taxa de serviço - o que inclusive é conferido às
+                        regras do cancelamento e taxas que incidam no serviço contratado. 17.1.7. Os
+                        valores não regularizados na VoePro dentro do prazo estipulado, serão passíveis
+                        de cobranças extrajudiciais ou judiciais pela equipe autorizada da VoePro, bem
+                        como a geração de títulos 17.1.8. A VoePro quando houver algum débito de sua
+                        parte fará contato em que lhe dará prazo e a oportunidade da regularização, sem
+                        que seja gerado quaisquer títulos. 17.2. Passagens áreas 17.2.1. Antes do
+                        momento de conclusão de sua compra, a VoePro te informou sobre as regras para o
+                        cancelamento ou remarcação de seus serviços, ainda caso precisar, para maior
+                        agilidade confira em Minhas Viagens as regras de eventuais cancelamentos ou
+                        alterações de sua compra. 17.2.2. Como atuamos apenas como intermediadora de
+                        venda de passagens, após a solicitação de sua compra, a disponibilidade do(s)
+                        voo(s) selecionado(s) é confirmado pela companhia aérea escolhida e, caso este
+                        não esteja mais disponível para emissão ou não esteja mais disponível pelo mesmo
+                        valor pela companhia aérea, sua solicitação de compra será cancelada e devolvido
+                        o valor eventualmente capturado, e estorno do valor pago. 17.2.3. Os sites das
+                        companhias aéreas podem passar por momentos de instabilidade. Por isso, alguns
+                        voos podem ser atualizados ou não serem mais encontrados pela plataforma da
+                        VoePro. Nesses casos, tente refazer sua pesquisa por passagem. 17.2.4. Passagens
+                        aéreas ida e volta: você poderá adquirir passagens de companhias aéreas e
+                        tarifas distintas. Essas transações serão emitidas em separado, por isso
+                        acompanhe a situação de cada uma, pois as solicitações de compra serão separadas
+                        e se houver retarifação em uma destas é feito o cancelamento automático dessa
+                        sua solicitação. Assim, caso queira cancelar a outra passagem, você terá que
+                        observar as regras de cada tarifa para o cancelamento, ou poderá registrar um
+                        pedido de desistência conforme dispõe o item 17.1.1. 17.2.5. Não é possível
+                        realizar a transferência de titularidade de passagens. 17.2.6. Você poderá
+                        desistir de sua passagem aérea e seu contrato será rescindido observado as
+                        regras: (i) a VoePro faz a intermediação da compra e respectivamente deste
+                        cancelamento, com isso poderá se incidir a taxa de intermediação prevista antes
+                        da conclusão de sua compra; (ii) a VoePro irá validar seu pedido de cancelamento
+                        sem taxas na companhia aérea, desde que observado o prazo de até 20 (vinte)
+                        horas a contar do horário de emissão de suas passagens e que este voo ocorra com
+                        antecedência igual ou superior a 07 (sete) dias. 17.2.7. A VoePro solicita este
+                        prazo, pois como intermediadora é necessário tempo hábil para intermediar sua
+                        solicitação junto à companhia aérea, as quais exigem até 24 (vinte e quatro
+                        horas), lembrando que, você poderá estar sujeito às regras e taxas dispostas
+                        pelas companhias aéreas. 17.2.8. Ao realizar o pedido de cancelamento da sua
+                        passagem aérea, você deverá levar em consideração que o serviço de transporte
+                        aéreo comercial no Brasil é regido por um conjunto de legislações que vão além
+                        do Código de Defesa do Consumidor, como a Resolução 400 da Agência Nacional da
+                        Aviação Civil, as Normas Internacionais da IATA, International Air Transport
+                        Association, ou "Normas Aeronáuticas", as quais trazem regramento específico
+                        sobre o Direito de Arrependimento, sendo aplicáveis e de responsabilidade das
+                        cias aéreas estabelecerem as condições e regras de cancelamento, sem que a
+                        VoePro tenha qualquer intervenção nesse processo. 17.2.9. As companhias aéreas
+                        poderão alterar as condições de voos, como datas, itinerários ou horários, em
+                        alguns casos os voos serão cancelados ou atrasados e competirá às companhias
+                        procederem a comunicação conforme regulamentação aplicável. A VoePro não tem
+                        ingerência sobre as alterações dos voos. Assim se uma destas variações ocorrer
+                        em até 72 horas do horário inicial previsto para o seu voo por instruções da
+                        própria companhia aérea, a VoePro irá repassar as verificações necessárias junto
+                        às próprias companhias aéreas, as alternativas quando disponíveis e, ante as
+                        regras de sua tarifa e disponibilidade das companhias aéreas, uma vez que são
+                        estas que realizam o serviço de transporte aéreo. 17.2.10. Caso você não possa
+                        voar no horário e/ou data da passagem adquirida, é necessário realizar seu
+                        cancelamento ou pedido de alteração, desde que viável ao tipo de sua tarifa, em
+                        até 48 horas antes do horário de seu voo para que, possamos ter tempo hábil para
+                        intermediar/informar no prazo estabelecido em sua tarifa e ante as regras da
+                        companhia aérea. 17.2.11. Caso você queira cancelar ou alterar a data do voo
+                        contratado, é importante considerar que as companhias aéreas determinam as
+                        regras e as penalidades sobre tal ato, podendo, ainda, a VoePro cobrar o valor
+                        da taxa de intermediação (serviço prestado). 17.2.12. O(s) passageiro(s) poderão
+                        solicitar alterações das passagens emitidas através das milhas que você ofertou,
+                        quando este ato ocorrer e seu pagamento ainda não ter sido realizado, este será
+                        suspenso até a conclusão dos procedimentos, em que poderá resultar: (i) o
+                        pagamento será suspenso integralmente até que a solicitação do passageiro for
+                        concluída, após tal ato suas milhas poderão ser devolvidas no prazo e forma
+                        definido por seu programa de fidelidade, ou (ii) se o cancelamento for apenas de
+                        parte dos passageiros ou parte dos trechos, seu pagamento será proporcional a
+                        quantidade de milhas que permaneceram utilizadas após o cancelamento. 17.2.13.
+                        Para os casos de cancelamento total, ou seja, todos os passageiros e trechos da
+                        reserva, você terá que realizar um novo cadastro da oferta após as milhas
+                        retornarem ao seu programa de fidelidade. O prazo de pagamento das milhas será
+                        calculado com base na data das novas emissões, assim como o valor, que será
+                        definido por você no momento do novo cadastro da oferta. 17.2.14. Remarcação das
+                        passagens aéreas: quando houver a efetividade da remarcação das passagens
+                        emitidas com suas milhas antes do recebimento do pagamento, a data do pagamento
+                        não sofrerá alteração, mas se a quantidade de milhas da nova passagem for
+                        inferior, a VoePro pagará apenas pela nova quantidade de milhas que foi
+                        realmente utilizada. No mesmo sentido ocorrerá se a quantidade de milhas
+                        utilizada for maior e a diferença será adicionada ao pagamento previamente
+                        programado. 17.3. Serviços de Hospedagem e Pacotes 17.3.1. A possibilidade de
+                        cancelamento ou alteração e, no caso, as penalidades aplicáveis a cada serviço e
+                        as políticas da hospedagem selecionada, são informadas na oferta, a VoePro não
+                        detém gestão das regras de cada serviço e qualquer exceção às referidas
+                        condições deverá ser autorizado pela hospedagem. 17.3.2. Para os casos de
+                        arrependimento de sua compra seu contrato restará devidamente rescindido
+                        observado as regras: (i) a VoePro faz a intermediação da compra e
+                        respectivamente deste cancelamento, com isso poderá se incidir a taxa de
+                        intermediação prevista antes da conclusão de sua compra; (ii) Para passagens
+                        aéreas seu pedido de cancelamento será validado conforme os itens acima (iii)
+                        para alterar ou cancelar seus serviços de hospedagem, passeios, dentre outros
+                        serviços que possa ter adquirido através de nossa plataforma, leia as regras
+                        antes de sua compra, bem como seu e-mail de confirmação de compra e siga as
+                        instruções para fazê-lo. 17.3.3. Com isso, é muito importante que você leia
+                        cuidadosamente as políticas de cancelamento e remarcação, (pré) pagamento e após
+                        a confirmação de sua compra. 17.4. Venda de Milhas. 17.4.1. Caso o passageiro
+                        cancele ou solicite a remarcação da passagem, este será atendido dentro das
+                        regras da respectiva passagem. 17.4.1.1. Você está ciente que nestes casos, será
+                        analisado pela VoePro, a qual se reserva no direito de escolher uma ou mais
+                        opções abaixo como forma de quitação da pendência: i. Solicitar a devolução do
+                        pagamento ao recebedor, referente a quantidade de milhas que não foi possível
+                        reutilizar, na conta bancária e prazo informados por esta empresa; ou ii. Quando
+                        for possível reutilizar as milhas oriundas do cancelamento das referidas
+                        passagens, sem o direito a receber por qualquer diferença de preço entre o valor
+                        negociado pelas milhas na ocasião e o valor atual, permanecendo todas as
+                        obrigações elencadas neste termo até que as novas passagens sejam emitidas e
+                        voadas por estas milhas. iii. Caso seja feita a reutilização das milhas, a
+                        quantidade de passageiros da nova emissão será no mínimo igual à quantidade
+                        utilizada na emissão original. iv. Caso você não tenha mais acesso ao seu
+                        programa de fidelidade por bloqueio e/ou exclusão ou qualquer outro motivo que
+                        torne sua conta inacessível, bem como não tiver saldo de milhas em seu programa
+                        igual ou superior ao da reutilização, ou mesmo se não tiver mais disponibilidade
+                        para emitir passagens para terceiros, conforme as regras do próprio programa de
+                        fidelidade, essa opção deixará de ser válida como quitação de sua pendência; ou
+                        v. Abater os valores de pagamentos que você tem a receber de outras vendas,
+                        independente do programa de fidelidade, ou de qualquer outro crédito que possua
+                        através de nossos serviços de uso de da plataforma. vi. O fluxo em questão
+                        poderá ocorrer uma ou mais vezes, já que depende exclusivamente da vontade do
+                        passageiro em transigir em sua viagem. 17.4.2. Ainda será de sua
+                        responsabilidade: i. Manter seu cadastro atualizado na VoePro, seja com seus
+                        dados de acesso ao seu programa de fidelidade, incluindo a senha de resgate nos
+                        programas de fidelidade que exigirem para procedimentos via call center, bem
+                        como os de contato como seu e-mail, telefones, whatsapp e endereço residencial.
+                        ii. Retornar imediatamente ou em até 24 horas os contatos da VoePro, seja para
+                        atualização ou fornecimento de informações necessárias para a concretização da
+                        remarcação ou cancelamento das passagens aéreas. iii. Caso caracterize no show
+                        na passagem devido ao seu não retorno ou observância aos procedimentos
+                        necessários, todas as despesas geradas para a nova emissão, remarcação e/ou o
+                        valor total que recebeu pela venda de suas milhas deverá ser reembolsado a
+                        VoePro. iv. Não realizar procedimentos que impactem negativamente no fluxo de
+                        alteração involuntária de passagem oferecida pela companhia aérea e de escolha
+                        do passageiro. v. Não realizar cancelamento, remarcação ou qualquer tipo de
+                        alteração na reserva sem a solicitação do passageiro e intermediação da VoePro.
+                        17.4.3. A não observância das condições aqui estabelecidas das condições aqui
+                        estabelecidas, ainda poderão incidir: i. Na responsabilidade em arcar com todas
+                        as despesas, seja diferença tarifária ou da quantidade de milhas para emissão
+                        das novas passagens, bem como as taxas de embarque e bagagem, deslocamento em
+                        caso de alteração de aeroporto, hospedagem e todos os demais custos gerados à
+                        VoePro e ao(s) passageiro(s). ii. Se houver expiração de milhas entre o momento
+                        da primeira tentativa de contato da VoePro até a solução do caso, a perda das
+                        milhas será de responsabilidade exclusiva do vendedor, devendo ressarcir a
+                        VoePro no fluxo citado no item 17.4.1 e seus subitens. 17.4.3. No serviço de
+                        venda de milhas, caso ainda existam valores a serem adimplidos, ressarcidos e/ou
+                        devolvidos, a VoePro realizará as notificações para a regularização de sua
+                        pendência.</p>
+                    <!-- Inserir texto aqui -->
+
+                    <h3 class="text-lg font-semibold text-primary mt-4 mb-2">18. DO REEMBOLSO</h3>
+                    <p>18.1. O valor líquido de reembolso é igual ao valor tarifa + taxas de
+                        embarque, subtraído do valor da multa cobrada. 18.2. Solicitações de
+                        cancelamentos feitas a partir de 01/01/2022 seguem as regras conforme Medida
+                        Provisória nº 1.101 da ANAC. Na impossibilidade de comparecer ao embarque ou na
+                        hospedagem, recomendamos que solicite o cancelamento o quanto antes. 18.3. Os
+                        cancelamentos devem seguir as seguintes regras de solicitações e prazos: §
+                        Cancelamentos solicitados em até 24h da data da compra de passagem(ns) aérea(s),
+                        com embarque superior a 7 dias: crédito integral do bilhete, caso tenha sido
+                        contratado esse serviço. § Cancelamento solicitado pelo cliente (voluntário):
+                        tarifa não reembolsável, adquirido junto com a passagem aérea. § Cancelamento
+                        involuntário (companhia aérea): Para voos com alteração superior a 31 minutos
+                        (nacional) e 61 minutos (internacional) se elegível, após aprovação da companhia
+                        aérea, será reembolsado. § Se você tiver algum imprevisto e precisar cancelar a
+                        sua viagem, é importante que você leia as informações a seguir com atenção: Se
+                        no ato do cancelamento estiver previsto algum valor a ser reembolsado, a
+                        devolução poderá ocorrerá por meio do Voucher, com validade de 12 meses a partir
+                        da data de recebimento do voucher. § Bilhetes aéreos emitidos com trecho ida e
+                        volta, o cancelamento terá como data e hora referência o primeiro trecho do voo
+                        (ida). § Cancelamento de passagens aéreas com trechos de ida e volta, o
+                        cancelamento deve ser realizado de ambos os trechos. 18.4. Em caso de
+                        recebimento de reembolso, o valor é creditado de acordo com a forma de pagamento
+                        adotada no pedido: 1. Cartão de crédito: em pedidos realizados via cartão de
+                        crédito, o valor referente ao reembolso é creditado para o mesmo cartão
+                        utilizado na compra. O prazo segue a Medida Provisória nº 1.101, de 21 de
+                        fevereiro de 2022. 2. Boleto (à vista ou parcelado) e/ou SafetyPay: em pedidos
+                        realizados com boleto à vista, o valor é estornado/reembolsado para a conta
+                        bancária do titular pagante/cadastro. O prazo segue a Medida Provisória nº
+                        1.101, de 21 de fevereiro de 2022. Para o recebimento dos valores, é necessário
+                        que nos encaminhe os dados bancários abaixo, e o devem ser, da mesma
+                        titularidade do responsável pagante (quem realizou o pagamento do pedido de
+                        compra), contendo: § Nome completo; § CPF; § Banco; § Agência; § Conta: ( )
+                        Corrente ( ) Poupança; § Foto do comprovante de pagamento. 3. Pix: para pedidos
+                        cancelados devido a não emissão do bilhete, o valor é devolvido para a mesma
+                        conta utilizada no ato do pagamento em nossa plataforma. 4. Pix: para pedidos já
+                        emitidos, o valor é reembolsado para a conta bancária do titular
+                        pagante/cadastro. O prazo segue a Medida Provisória nº 1.101, de 21 de fevereiro
+                        de 2022. Para o recebimento dos valores, é necessário que nos encaminhe os dados
+                        bancários do titular pagante por meio de nosso e-mail, qual seja: xxxxxx. 18.5.
+                        Nos casos que a VoePro tiver conhecimento que houve falecimento/invalidez do
+                        titular do cadastro, eventuais valores quando passíveis de reembolso somente
+                        serão devolvidos ante a comprovação de documentação de representatividade
+                        pública, como ao espólio deste. Quando for o caso de passageiros/acompanhantes
+                        será devolvido ao titular de cadastro. 18.6. Os prazos de devolução de valores
+                        pagos por cancelamento de serviços de passagens aéreas e hospedagem estão
+                        sujeitos às regras de sua tarifa e modalidade de pagamento. Em linhas gerais, o
+                        prazo ou solicitação de reembolso é de até 07 dias úteis, exceto aos casos
+                        previstos em legislação específica e conforme as regras de sua tarifa. 18.6.1.
+                        Os reembolsos possíveis de pagamento de cartão de crédito, da data da
+                        solicitação deve ser somado um acréscimo de 90 (noventa) dias, conforme a
+                        operadora e, a depender da data de fechamento da fatura do cartão utilizado. i.
+                        ii. iii. 18.6.2. Caso você constate fraude ou uso não autorizado do seu cartão
+                        de crédito, pagamentos de operações bancárias diversas e/ou acesso à sua conta
+                        por terceiros, é necessário verificar com seu banco e empresa de seu cartão de
+                        crédito. Para contribuir com sua segurança: Podemos bloquear o cadastro
+                        utilizado pela compra ante sua solicitação; Somente temos gerência de
+                        cancelamento de valores se por alguma fatalidade adveio de um erro de nosso
+                        sistema, do contrário será necessário gerir com seu próprio banco ou operadora
+                        de cartões. Cancelamento de quaisquer serviços, será possível se os serviços
+                        ainda não forem emitidos ou utilizados, caso ele já tenha sido, a VoePro após a
+                        verificação do ocorrido, poderá intermediar o cancelamento ante as regras e
+                        taxas dos referidos serviços. 18.7. De acordo com o Artigo 49 do Código de
+                        Defesa do Consumidor, fica o CONTRATANTE, o direito de: "O consumidor pode
+                        desistir do contrato, no prazo de sete dias a contar de sua assinatura ou do ato
+                        de recebimento do produto ou serviço, sempre que a contratação de fornecimento
+                        de produtos e serviços ocorrer fora do estabelecimento comercial, especialmente
+                        por telefone ou em domicílio. Parágrafo único. Se o consumidor exercitar o
+                        direito de arrependimento previsto neste artigo, os valores eventualmente pagos,
+                        a qualquer título, durante o prazo de reflexão, serão devolvidos, de imediato,
+                        monetariamente atualizados" Caso o CONTRATANTE exerça seu direito de acordo com
+                        o artigo 49 do CDC, não fazemos devoluções em caso de compra com menos de 7 dias
+                        de realização do evento. 18.8. O reembolso não é corrigido pelo INPC. 18.9. As
+                        taxas referentes à inclusão de bagagens não são reembolsadas em caso de
+                        cancelamento de bilhetes já emitidos 18.10. Os itens que integram a categoria de
+                        Promoção em nossa plataforma não são elegíveis para alterações ou remarcações.
+                        18.11. Somente a companhia aérea pode analisar e validar as tratativas
+                        solicitadas. A VoePro atua como intermediadora entre cliente e cia. aérea e não
+                        tem autonomia nas decisões da empresa aérea.</p>
+                    <!-- Inserir texto aqui -->
+
+                    <h3 class="text-lg font-semibold text-primary mt-4 mb-2">19. RECLAMAÇÕES E FALHAS NO SISTEMA</h3>
+                    <!-- Inserir texto aqui -->
+                    <p>19.1 Em caso de reclamações quanto à prestação de serviços, o CONTRATANTE as
+                        encaminhará por escrito a CONTRATADA até 30 dias após o encerramento dos mesmos,
+                        conforme Artigo 26, parágrafo 1° do Código de Defesa do Consumidor. Se não o
+                        fizer dentro do prazo estipulado, a relação contratual será considerada perfeita
+                        e acabada. 19.2 Em caso de deficiência no serviço prestado por terceiros, não
+                        diretamente pela CONTRATADA, a reclamação deverá ser devidamente reportada, por
+                        escrito, ao prestador de serviço local, com devido protocolo. Uma cópia do
+                        documento, devidamente protocolada, deverá ser apresentada a CONTRATADA,
+                        juntamente com a reclamação, para que ela possa auxiliar o CONTRATANTE na
+                        obtenção de eventual indenização das perdas e danos. 19.3. Não nos
+                        responsabilizamos por qualquer dano, prejuízo ou perda sofridos pelo usuário em
+                        razão de falhas na internet, no sistema ou no servidor utilizado pelo usuário,
+                        decorrentes de condutas de terceiros, caso fortuito ou força maior. A VoePro
+                        também não será responsável por qualquer vírus que possa acometer o equipamento
+                        do usuário em decorrência do acesso, utilização ou navegação na internet ou como
+                        consequência de transferência de dados. 19.4. Você é responsável, em verificar
+                        as atualizações de sua segurança de navegação na internet para se evitar
+                        quaisquer tipo de vírus, e também as falhas que advenha de sua conexão, ou seja,
+                        em seu sistema ou no servidor deste, decorrentes de seu uso ou de terceiros,
+                        mesmo que, por caso fortuito ou força maior.</p>
+
+                    <h3 class="text-lg font-semibold text-primary mt-4 mb-2">20. PROPRIEDADE INTELECTUAL E LINKS</h3>
+                    <p>20.1. O uso comercial da expressão "VoePro" como marca, nome empresarial ou
+                        nome de domínio, bem como os conteúdos das telas relativas aos serviços da
+                        VoePro assim como os programas, bancos de dados, redes, arquivos que permitem
+                        que o usuário acesse e use sua conta, são propriedade da VoePro e estão
+                        protegidos pelas leis e tratados internacionais de direito autoral, marcas,
+                        patentes, modelos e desenhos industriais. O uso indevido e a reprodução total ou
+                        parcial dos referidos conteúdos são proibidos, salvo em casos de autorização
+                        expressa da VoePro. 20.2. O website da VoePro pode conter links de outros sites
+                        (incluindo companhias aéreas e agências de viagens), o que não significa que
+                        esses websites sejam de propriedade ou operados pela VoePro. A VoePro não será
+                        responsável pelos conteúdos, práticas e serviços ofertados nos mesmos. A
+                        presença de links para outros websites não implica relação de sociedade, de
+                        supervisão, de cumplicidade ou solidariedade da VoePro para com esses websites e
+                        seus conteúdos. 20.3. Todas as informações e conteúdos que estão disponíveis
+                        através da plataforma da VoePro estão protegidos por leis de direitos autorais e
+                        não devem ser utilizadas de outra forma que não a estabelecida nestes Termos ou
+                        com a autorização por escrito, da VoePro. Imagens de pessoas ou artes, fotos
+                        particulares, exibidas na Plataforma, são de propriedade da VoePro e fica
+                        proibido o uso dessas imagens por você ou por terceiros. 20.4. O CLIENTE
+                        autoriza desde já, a utilização de seu nome, imagem e voz, em quaisquer meios de
+                        comunicação incluindo divulgação em redes sociais como marketing da VoePro por
+                        período indeterminado, com o propósito de reforço de mídia publicitária e
+                        reconhecimento da marca. 20.5. As mesmas proteções se alcançam para os domínios,
+                        extensões de e-mails da VoePro, ficando vedado criações ou vinculações de
+                        menções com as palavras VoePro, ou mesmo similares, que possam causar confusão à
+                        outros clientes ou mesmo ao quadro colaborativo da VoePro. 20.6. Qualquer uso
+                        não autorizado pode violar legislações e normativas aplicáveis, podendo resultar
+                        em penalidades civis e/ou criminais 20.7. Se você ou alguém constante em seu
+                        cadastro, carregar fotos/imagens/menções em nosso sistema ou redes sociais, você
+                        certifica, garante e concorda que possui os direitos autorais das
+                        fotos/imagens/menções e que aceita que a VoePro possa utilizar as
+                        fotos/imagens/menções enviadas ao nosso aplicativo, site para celulares,
+                        materiais promocionais (online/offline) e publicações, da forma que a VoePro
+                        possa publicar da forma que considerar mais conveniente e por tempo
+                        indeterminado, respeitadas as legislações vigentes, sem que não lhe seja devido
+                        nenhuma indenização por uso destes. 20.8. Cabe ao usuário indenizar a VoePro,
+                        suas filiais, empresas controladas ou controladoras, diretores, administradores,
+                        colaboradores, representantes e empregados por qualquer demanda promovida por
+                        outros usuários ou terceiros decorrentes de suas atividades no website ou por
+                        seu descumprimento dos Termos e Condições Gerais de Uso e demais políticas da
+                        VoePro, ou pela violação de qualquer lei ou direitos de terceiros, incluindo
+                        honorários de advogados.</p>
+                    <!-- Inserir texto aqui -->
+
+                    <h3 class="text-lg font-semibold text-primary mt-4 mb-2">21. DAS LIMITACÕES DE DIREITO</h3>
+                    <p>21.1. Todas as cláusulas que possam implicar qualquer limitação aos direitos
+                        do CLIENTE, encontram-se em respeito ao artigo 54, parágrafo 3º, do Código de
+                        Defesa do Consumidor, escritas de forma clara e destacada e foram previamente
+                        lidas, entendidas, aceitas e subscritas pelo CLIENTE. 21.2. O CLIENTE declara,
+                        neste momento, ao LER o presente contrato, total conhecimento e aceitação
+                        integralmente de todas as suas cláusulas específicas e gerais, declarando,
+                        ainda, serem verdadeiras todas as informações prestadas à VoePro, assumindo, de
+                        livre e espontânea vontade, todas as responsabilidades previstas neste Contrato.
+                    </p>
+                    <!-- Inserir texto aqui -->
+
+                    <h3 class="text-lg font-semibold text-primary mt-4 mb-2">22. DISPOSIÇÕES GERAIS FINAIS</h3>
+                    <p>22.1. A tolerância, por qualquer das partes, com relação ao descumprimento de
+                        qualquer termo ou condição aqui ajustado, não será considerada como desistência
+                        em exigir o cumprimento de disposição nele contida, nem representará novação com
+                        relação à obrigação passada, presente ou futura, no tocante ao termo ou condição
+                        cujo descumprimento foi tolerado. 22.2. Na hipótese de qualquer cláusula deste
+                        contrato ser declarada inválida, as partes compactuam que a alegada invalidade
+                        não afetará as disposições remanescentes que permanecerão em pleno vigor. As
+                        partes deverão negociar de boa-fé, de forma a chegar a um acordo na redação de
+                        uma nova cláusula que seja satisfatória e que possa refletir as suas reais
+                        intenções, conforme expressas no presente Contrato, a qual substituirá aquela
+                        considerada nula, ilegal ou inexequível. 22.3. Eventual infração a qualquer das
+                        cláusulas aqui estabelecidas ensejará a parte inocente a promover medidas
+                        judiciais para haver perdas e danos. 22.4. As partes elegem a Mediação como meio
+                        prévio e obrigatório de solução para as controvérsias que venham a surgir entre
+                        elas, oriundas ou relacionadas à presente relação contratual, inclusive as
+                        relativas à interpretação, validade, eficácia e a qualquer forma de extinção do
+                        presente contrato, e concordam expressamente que o procedimento da Mediação será
+                        administrado por Câmara Arbitral competente, de acordo com as disposições do seu
+                        Regulamento de Normas Éticas e Procedimentais de Mediação que estiverem em vigor
+                        na data do início do referido procedimento. 22.5. Caso a tentativa de consenso
+                        não logre êxito na Mediação e as partes decidam submeter a controvérsia à tutela
+                        judicial ou arbitral, poderão a qualquer tempo, ainda que iniciado o processo
+                        judicial ou arbitral, retomar o procedimento de Mediação, hipótese em que
+                        requererão ao juiz ou ao árbitro a suspensão do respectivo processo por prazo
+                        suficiente para a solução consensual do conflito. 22.6. Caso não logre êxito a
+                        tentativa de mediação, as partes estabelecem como foro principal para
+                        judicialização das controvérsias existentes a comarca de Marabá, Estado do Pará.
+                        22.7. Os presentes Termos e Condições Gerais são regidos pelas leis do Brasil.
+                    </p>
+                    <!-- Inserir texto aqui -->
+
+                    <h2 class="text-xl font-bold text-primary mt-6 mb-4">POLÍTICA DE PRIVACIDADE</h2>
+
+                    <h3 class="text-lg font-semibold text-primary mt-4 mb-2">1. Nossa política e a proteção dos seus dados</h3>
+                    <!-- Inserir texto aqui -->
+                    <p>A VoePro, alinhada à cultura mundial de Proteção de Dados Pessoais, está
+                        comprometida em resguardar a privacidade de dados de seus clientes,
+                        consumidores, fornecedores, colaboradores e de todos aqueles com os quais possui
+                        relacionamento ("Usuários"), garantindo a transparência, a não discriminação e o
+                        livre acesso, adotando medidas de prevenção de ocorrência de danos, bem como
+                        adequando seus processos de tratamento de dados às necessidades e finalidades
+                        exigidas para a realização de seu propósito como empresa. Este documento tem por
+                        finalidade proporcionar um claro entendimento de como é feito o tratamento de
+                        dados pessoais, seja no momento da coleta, utilização, armazenamento,
+                        compartilhamento, descarte e quaisquer outras atividades consideradas em nosso
+                        contexto operacional interno e externo. A nossa Política de Privacidade abarcará
+                        todos os produtos e serviços que podem ser encontrados no site da VoePro, ou
+                        seja, você pode consultá-la para tirar suas dúvidas sobre como seus dados são
+                        utilizados. O(A) CONTRATANTE declara expresso CONSENTIMENTO que a VoePro irá
+                        coletar, tratar e compartilhar os dados necessários ao cumprimento do contrato,
+                        nos termos do Art. 7º, inc. V da LGPD, os dados necessários para cumprimento de
+                        obrigações legais, nos termos do Art. 7º, inc. II da LGPD, bem como os dados, se
+                        necessários para proteção ao crédito, conforme autorizado pelo Art. 7º, inc. V
+                        da LGPD. A nossa razão social é VoePro, nosso CNPJ é XXXX e o endereço......</p>
+
+                    <h3 class="text-lg font-semibold text-primary mt-4 mb-2">2. Conceitos Iniciais</h3>
+                    <!-- Inserir texto aqui -->
+                    <p>Antes de apresentar o modo como cuidamos dos seus dados, é importante deixar
+                        claro os principais conceitos que serão utilizados nesta política: • Agente de
+                        Tratamento O nosso papel enquanto agente de tratamento de dados é,
+                        predominantemente, de Controlador, nos termos do artigo 5º, VI, da Lei nº
+                        13.709/2018 - Lei Geral de Proteção de Dados Pessoais ("LGPD"). • Titulares dos
+                        Dados Os titulares dos dados pessoais, conforme o artigo 5º, V, da LGPD, são
+                        todas as pessoas naturais (pessoas físicas) de cujos dados tratamos. •
+                        Tratamento dos Dados São consideradas como tratamento de dados pessoais, de
+                        maneira exemplificativa, as atividades de coleta, produção, recepção,
+                        classificação, utilização, acesso, reprodução, transmissão, distribuição,
+                        processamento, arquivamento, armazenamento, eliminação, avaliação ou controle da
+                        informação, modificação, comunicação, transferência, difusão ou extração de
+                        dados pessoais das pessoas consideradas como titulares, conforme artigo 5º, X,
+                        da LGPD.</p>
+
+                    <h3 class="text-lg font-semibold text-primary mt-4 mb-2">3. Princípios</h3>
+                    <!-- Inserir texto aqui -->
+                    <p>Atendendo ao disposto no artigo 6º da LGPD, todo o tratamento de dados
+                        pessoais realizado pela VoePro é feito em estrita conformidade com os seguintes
+                        princípios: • Finalidade: todo o tratamento de dados que promovemos tem
+                        propósitos legítimos, específicos e constantes desta Política; • Adequação: todo
+                        o tratamento de dados que promovemos é compatível com as finalidades informadas
+                        nesta Política; • Necessidade: limitamos o tratamento de dados realizado ao
+                        mínimo necessário para a realização das finalidades constantes desta política,
+                        abrangendo apenas os dados pertinentes, proporcionais e não excessivos; • Livre
+                        Acesso: os Usuários, por meio do próprio site, têm acesso à consulta facilitada
+                        e gratuita sobre a forma e a duração do tratamento de seus dados pessoais, bem
+                        como sobre a integralidade de seus dados pessoais. • Qualidade de Dados:
+                        garantimos, aos Usuários, a exatidão, clareza, relevância e atualização dos
+                        dados, de acordo com a necessidade e para o cumprimento da finalidade do
+                        tratamento realizado; • Transparência: garantimos aos Usuários informações
+                        claras, precisas e facilmente acessíveis acerca da realização do tratamento e
+                        dos respectivos agentes de tratamento; • Segurança: utilizamos medidas técnicas
+                        e administrativas aptas a proteger os dados pessoais de acessos não autorizados
+                        e de situações acidentais ou ilícitas de destruição, perda, alteração,
+                        comunicação ou difusão; • Prevenção: por meio de programas de compliance,
+                        treinamentos e da utilização de ferramentas tecnológicas, adotamos medidas
+                        capazes de prevenir a ocorrência de danos em virtude do tratamento de dados
+                        pessoais; • Não Discriminação: a VoePro jamais realiza tratamento de dados para
+                        fins discriminatórios ilícitos ou abusivos.</p>
+
+                    <h3 class="text-lg font-semibold text-primary mt-4 mb-2">4. Dados pessoais tratados</h3>
+                    <!-- Inserir texto aqui -->
+                    <p>Para que possamos executar nossos serviços, é necessário que coletemos alguns
+                        dos seus dados pessoais, como nome, número do documento de identificação,
+                        endereço, dados do navegador, entre outros. Os dados coletados são fundamentais
+                        para que a VoePro continue prestando com qualidade os serviços a que se propõe,
+                        conferindo segurança de todas as informações que trata.</p>
+
+                    <h3 class="text-lg font-semibold text-primary mt-4 mb-2">5. Como, Quando e Quais Dados Coletamos</h3>
+                    <!-- Inserir texto aqui -->
+                    <p>Informações Solicitadas: Ao realizar cadastro em nosso website, o usuário
+                        deve fornecer informações pessoais essenciais para que seja possível realizar
+                        transações comerciais conosco. No caso de pessoa física, é obrigatório o
+                        fornecimento das informações corretas de nome, sobrenome, data de nascimento,
+                        sexo, CPF, telefone fixo, celular, e-mail, senha para login e dados de pagamento
+                        em caso de finalização de pedido de compra. Se pessoa jurídica, é necessário
+                        fornecer nome do responsável pela empresa, sobrenome, data de nascimento, sexo,
+                        razão social da empresa, nome fantasia, CNPJ, telefone fixo, celular, e-mail,
+                        senha para login e dados de pagamento em caso de finalização de pedido de
+                        compra. Caso as informações solicitadas para cadastro não sejam fornecidas, o
+                        usuário não poderá dar prosseguimento a processos de cadastro e compra em nosso
+                        website. Ao fornecer as informações necessárias e consequentemente concordar com
+                        a presente Política de Privacidade, o usuário autoriza o uso desses dados para
+                        efetuar transações solicitadas por ele mesmo, fazer reservas de passagens aéreas
+                        emitidas por milhas, enviar e-mails de notificação de compra, processar
+                        faturamentos e para que possamos entrar em contato quando necessário, através de
+                        nosso serviço de atendimento ao consumidor.; • Informações Coletadas: Dentro do
+                        que é permitido em lei, a VoePro poderá obter informações adicionais sobre seus
+                        usuários fornecidas através de bases de dados públicas, informações coletadas
+                        durante ligações telefônicas ao nosso serviço de atendimento ao consumidor ou
+                        através de aplicações interativas. Toda informação coletada será utilizada única
+                        e exclusivamente para traçar o perfil de cada usuário e assim adaptar nossas
+                        ações de marketing e desenvolvimento de novos produtos e serviços, às suas
+                        necessidades e interesses. O armazenamento e uso dessas informações adicionais
+                        também obedecem às disposições desta Política de Privacidade.</p>
+
+                    <h3 class="text-lg font-semibold text-primary mt-4 mb-2">6. Visitantes do site</h3>
+                    <!-- Inserir texto aqui -->
+                    <p>Ao visitar o nosso Site, nós coletamos seus dados por meio de cookies que são
+                        instalados em seu computador para personalizar sua navegação e oferecer a
+                        experiência adequada aos seus interesses e necessidades. Esses dados se referem
+                        ao tipo de sistema operacional, ao navegador e aos equipamentos que utiliza, à
+                        sua localização, ao seu endereço de IP, ao tempo de visita e ao percurso da sua
+                        navegação. Além disso, caso opte por se inscrever no nosso sistema de mailing,
+                        também coletaremos seu nome e seu e-mail.</p>
+
+                    <h3 class="text-lg font-semibold text-primary mt-4 mb-2">7. Clientes da VoePro</h3>
+                    <!-- Inserir texto aqui -->
+                    <p>Se você é nosso cliente, teremos algumas fases diferentes durante o processo.
+                        • Cadastro no Site: Durante o cadastro, para que possamos prosseguir com a
+                        utilização dos nossos serviços, é necessário conhecer você um pouco melhor. Para
+                        isso, solicitamos que preencha seu nome; sua data de nascimento; o gênero com o
+                        qual se identifica; o número do seu CPF; seu endereço; número de telefone fixo e
+                        celular; seu e-mail e uma senha para login. • Compra de Produtos e Serviços: i.
+                        Quando você decide adquirir uma passagem, fazer a reserva em uma hospedagem ou
+                        reservar um pacote, será necessário identificar todos aqueles que utilizarão os
+                        produtos ou serviços, bem como identificar os dados da forma de pagamento, como
+                        os dados do cartão, por exemplo. ii. Já para o aluguel de carro, será necessário
+                        o nome completo, e-mail e CPF. Por fim, para o seguro- viagem, vamos solicitar
+                        os nomes de todos que utilizarão o serviço, assim como a data de nascimento e um
+                        documento de identificação. iii. Para que sua compra seja feita em segurança,
+                        nós utilizamos mecanismos de confirmação da titularidade do comprador. Ou seja,
+                        para evitar que aconteçam fraudes, nós fazemos a verificação dos dados de quem
+                        está promovendo o pagamento, evitando que seus dados sejam utilizados de maneira
+                        inadequada por terceiros. iv. É importante deixar claro que nós sabemos que é
+                        comum que a compra seja feita para terceiros. Pode ser uma viagem de família ou
+                        para presentear um amigo. Contudo, para manter nossa relação transparente,
+                        precisamos te alertar que é sua responsabilidade garantir que os envolvidos, que
+                        tiveram suas informações passadas para nós, estejam cientes da sua ação e de
+                        acordo com nossa Política de Privacidade. • Atendimento: Caso você queira entrar
+                        em contato com a VoePro, o nosso setor de atendimento coleta seus dados de
+                        cadastro; os dados dos serviços que você utilizou conosco; o perfil da sua rede
+                        social (caso tenha entrado em contato através dela); e a mensagem, o ID e a
+                        cidade, caso o contato ocorra pela plataforma Reclame Aqui. Nos casos em que
+                        você decida nos contatar por telefone, sempre será feita a gravação do
+                        atendimento, a fim de resguardar os direitos do Usuário da melhor forma
+                        possível. Essa gravação também ocorrerá nas conversas decorrentes de contato
+                        pela internet.</p>
+
+                    <h3 class="text-lg font-semibold text-primary mt-4 mb-2">8. Para quais fins coletamos</h3>
+                    <!-- Inserir texto aqui -->
+                    <p>A VoePro está sempre comprometida com a regularidade dos procedimentos de
+                        tratamento de dados que realiza. Assim, para nós, é muito importante que você
+                        possa compreender de forma clara para quais finalidades coletamos seus dados
+                        pessoais, bem como quais são as bases legais utilizadas nos termos da LGPD.</p>
+
+                    <h3 class="text-lg font-semibold text-primary mt-4 mb-2">9. Formas de tratamento</h3>
+                    <!-- Inserir texto aqui -->
+                    <p>9.1. Bases legais - A grande maioria dos dados tratados pela VoePro são
+                        obtidos por meio de fornecimento do consentimento, para cumprimento de obrigação
+                        legal ou regulatória, da execução de contratos e do legítimo interesse, nos
+                        termos do artigo 7º, incisos I, II, V e IX, respectivamente, da LGPD. 9.2.
+                        Consentimento - O consentimento livre, informado e inequívoco, é fornecido pelo
+                        Usuário quando este fornece os dados pessoais diretamente à VoePro,
+                        cadastrando-se no site, utilizando a plataforma (logs), e entrando em contato
+                        conosco. 9.3. Os dados são indispensáveis, posto que, sem o cadastro e sem
+                        informar os dados relativos aos usuários do serviço e à forma de pagamento, a
+                        VoePro não poderia prosseguir com nenhum dos seus serviços, tampouco com a
+                        comercialização dos seus produtos. 9.4. Cumprimento de obrigação legal ou
+                        regulatória - A VoePro por sua natureza está sujeita a utilização do dado
+                        pessoal para atender uma obrigação legal ou regulatória, como por exemplo
+                        Embratur/Daer (para o transporte de passageiros) /Lei Geral do Turismo, ANAC
+                        dentre outras. 9.5. Legítimo interesse - Tendo em vista a impossibilidade de se
+                        obter o consentimento do Usuário nas situações em que a VoePro verifica a
+                        autenticidade e a titularidade do pagador, para conduzir os processos de
+                        reclamações, na condução dos dados dos colaboradores e em outras situações
+                        próprias da atuação da VoePro, faz-se necessário que nos valhamos do Legítimo
+                        Interesse. 9.5.1. Nestas hipóteses, apenas os dados estritamente essenciais para
+                        os fins a que se destinam são tratados. De todo modo, o consentimento do Usuário
+                        será a forma primordial de tratamento, sendo o legítimo interesse restrito à
+                        necessidade premente da VoePro. Em caso de negativa do consentimento por parte
+                        do Usuário, este não poderá desempenhar a maioria das funcionalidades da VoePro,
+                        uma vez que, para atender às expectativas de nossos clientes, é necessário que
+                        tenhamos um registro sólido dos dados pessoais e financeiros no sistema. 9.5.2.
+                        Assim, como forma de demonstrar o legítimo interesse da VoePro, desenvolvemos a
+                        seguinte metodologia: • Legitimidade do nosso interesse: o tratamento dos dados
+                        dos clientes que se relacionam conosco, em determinados casos, decorre de
+                        interesse legítimo e essencial para nossa atividade. Além disso, tratas-e de
+                        situação concreta de necessidade de realizar o tratamento dos dados daquele
+                        Usuário. • Necessidade: conforme já salientado, tratamos com base no legítimo
+                        interesse os dados estritamente necessários a situações ímpares vivenciadas pela
+                        VoePro a fim de conferir legitimidade às respectivas condutas da empresa. Daí em
+                        diante, seu consentimento permanece sendo necessário. • Balanceamento: são
+                        assegurados aos Usuários todos os direitos constantes da LGPD, bem como
+                        permanecemos à disposição para sanar quaisquer dúvidas acerca desta Política. •
+                        Salvaguardas: todos os Usuários que tenham dados tratados com base no legítimo
+                        interesse têm a opção de entrar em contato com a VoePro e esclarecer o modo de
+                        tratamento de seus dados pessoais. 9.6. Execução de contrato - O tratamento em
+                        razão da execução de contrato ocorre, por exemplo, para gerenciar sua reserva,
+                        processar pagamentos ou criar uma conta sob sua solicitação. Portanto, ao
+                        finalizar a aquisição de algum produto ou serviço da VoePro, seus dados serão
+                        utilizados com a contraparte do serviço ou produto para que o contrato possa ser
+                        efetivado. Assim como no caso das demais bases não serão utilizados dados
+                        desnecessários para o tratamento, reforçando o compromisso da VoePro com esta
+                        Política de Privacidade e com a regulação legal da LGPD. 9.6.1. Para além das
+                        bases mencionadas, o tratamento de dados que se ampare em alguma outra base
+                        legal será prontamente notificado ao titular. Em caso de dúvidas quanto às bases
+                        de tratamento, o e-mail está ______ disponível para esclarecimentos.</p>
+
+                    <h3 class="text-lg font-semibold text-primary mt-4 mb-2">10. Com quem compartilhamos</h3>
+                    <!-- Inserir texto aqui -->
+                    <p>10.1. Compartilhamento de terceiros - A VoePro compartilha seus dados
+                        pessoais com terceiros em estrita observância da LGPD e nos limites do que for
+                        realmente necessário para a atingimento dos seus fins. 10.2. O compartilhamento
+                        de dados pessoais é feito com: • Gateways de pagamento e instituições
+                        financeiras para viabilizar a aquisição dos produtos e serviços oferecidos por
+                        nós; • Escritório de advocacia terceirizado para defesa dos interesses da VoePro
+                        em qualquer tipo de conflito, mediante decisão judicial ou requisição de
+                        autoridade competente; • Órgão ou entidade pública oficial, autoridade
+                        regulatória, policial ou governamental para cumprir obrigações legais e
+                        regulatórias, para fins de prevenção à lavagem de dinheiro e outros ilícitos, em
+                        resposta a solicitações realizadas no contexto de fiscalizações, auditorias,
+                        entre outros; • Empresa provedora de infraestrutura tecnológica e operacional
+                        para fins de armazenamento/backup na nuvem, com o intuito de garantir uma maior
+                        capacidade de armazenamento, tempo de resposta e segurança para os dados
+                        tratados em nossa organização; • Empresas pertencentes ao Grupo VoePro,
+                        parceiras comerciais como agências de turismo, locação de veículos, passagens
+                        aéreas e hotéis, que comercializam nossos serviços. 10.3. Esclarecemos que
+                        nossos parceiros comerciais não podem utilizar os seus dados pessoais para
+                        outros fins que não sejam os necessários à execução dos serviços firmados com a
+                        VoePro por meio de contratos rigorosos.</p>
+
+                    <h3 class="text-lg font-semibold text-primary mt-4 mb-2">11. Como mantemos os dados seguros</h3>
+                    <!-- Inserir texto aqui -->
+                    <p>11.1 Segurança dos dados - A VoePro, para conseguir atender seus Usuários da
+                        melhor forma possível, armazena as informações coletadas em suas páginas em
+                        servidores próprios ou por ela contratados. 11.2. Sempre pensando na segurança
+                        do armazenamento, nós tomamos as medidas adequadas e legalmente requeridas para
+                        preservar a privacidade dos dados coletados, implantando os sistemas de
+                        segurança necessários para tanto. 11.3. Dentre outros pontos, a VoePro possui
+                        proteção contra acesso não autorizado a seus sistemas; somente autoriza o acesso
+                        de pessoas previamente cadastradas; e adota os melhores esforços para evitar
+                        vazamentos de dados. Contudo, por mais que façamos o possível para garantir a
+                        segurança, nós incentivamos os Usuários a tomarem as medidas apropriadas para se
+                        proteger, como, por exemplo, manter confidenciais todos os nomes de usuário e
+                        senhas.</p>
+
+                    <h3 class="text-lg font-semibold text-primary mt-4 mb-2">12. Direitos dos titulares</h3>
+                    <!-- Inserir texto aqui -->
+                    <p>12.1. Direitos dos usuários da VoePro - Em cumprimento à regulamentação
+                        aplicável, no que diz respeito ao tratamento de dados pessoais, a VoePro
+                        respeita e garante ao Usuário a possibilidade de apresentação de solicitações
+                        baseadas nos seguintes direitos: i. Confirmação da existência de tratamento; ii.
+                        O acesso aos dados; iii. A correção de dados incompletos, inexatos ou
+                        desatualizados; iv. A anonimização, bloqueio ou eliminação de dados
+                        desnecessários, excessivos ou tratados em desconformidade; v. A portabilidade de
+                        seus dados a outro fornecedor de serviço ou produto, mediante requisição
+                        expressa pelo Usuário; vi. A eliminação dos dados tratados com consentimento do
+                        Usuário; vii. A obtenção de informações sobre as entidades públicas ou privadas
+                        com as quais a VoePro compartilhou seus dados; viii. A informação sobre a
+                        possibilidade de não fornecer o seu consentimento, bem como de ser informado
+                        sobre as consequências, em caso de negativa; ix. A revogação do consentimento.
+                        x. Informamos a utilização dos serviços de Cloud da AWS. Nessas nuvens são
+                        armazenados alguns arquivos e dados em Datacenters localizados fora do país.
+                        12.2. Parte destes direitos poderá ser exercida diretamente pelo Usuário, a
+                        partir da gestão de informações sobre sua conta, enquanto outros dependerão do
+                        envio de solicitação para posterior avaliação e adoção das providências pela
+                        VoePro.</p>
+
+                    <h3 class="text-lg font-semibold text-primary mt-4 mb-2">13. Ocorrências</h3>
+                    <!-- Inserir texto aqui -->
+                    <p>13.1. O(A) CONTRATANTE deverá reportar, de modo detalhado, nos termos da lei
+                        e regulamentos aplicáveis, a ocorrência de qualquer incidente e/ou quaisquer
+                        eventos que possam colocar em risco a integridade e/ou confidencialidade dos
+                        dados. 13.2. Em caso de incidente de segurança as partes deverão adotar medidas
+                        de assistência e cooperação mútuas, compartilhando todas as informações
+                        solicitadas e que sejam necessárias à elucidação dos indecentes, ressalvados os
+                        seus segredos comerciais. 13.3. O descumprimento das medidas impostas neste
+                        instrumento, nas políticas de privacidade de cada parte, bem como na Lei
+                        13.709/18, por quaisquer das partes, ensejará na aferição de responsabilidade e
+                        aplicação das penas e cominações legais. 13.4. As Partes declaram-se cientes dos
+                        direitos, obrigações e penalidades aplicáveis constantes da Lei Geral de
+                        Proteção de Dados Pessoais (Lei 13.709/2018), e obrigam-se a adotar todas as
+                        medidas razoáveis par garantir, por si, bem como seu pessoal, colaboradores,
+                        empregados e subcontratados que utilizem os Dados Protegidos na extensão
+                        autorizada na referida LGPD. 13.5. A VoePro não se responsabiliza por qualquer
+                        delito, negligencia, descumprimento contratual ou outra hipótese de ilícito
+                        civil ou penal que o(a) CONTRATENTE, causarem a terceiros ou aos titulares dos
+                        dados pessoais, incluindo o uso não autorizado de seus dados, sendo de total
+                        responsabilidade do(a) CONTRATANTE arcar com quaisquer danos, monetários ou de
+                        outra natureza, decorrentes de sua atuação indireta, direta ou incidental,
+                        cabendo a VoePro direito a regresso contra o(a) CONTRATANTE por tais situações.</p>
+
+                    <h3 class="text-lg font-semibold text-primary mt-4 mb-2">14. Atualização da política e fale conosco</h3>
+                    <!-- Inserir texto aqui -->
+                    <p>14.1. Atualização da política - A nossa Política de Privacidade busca
+                        esclarecer o modo como atuamos e te deixar a par de todos os dados que tratamos,
+                        respeitando as disposições legais aplicáveis. Para manter a política sempre em
+                        dia, seja por fatores legais, comerciais ou tecnológicos, podemos atualizá-la
+                        quando necessário. Caso a alteração seja materialmente relevante, entraremos em
+                        contato para mantê-los informados. De todo modo, sugerimos que consultem a
+                        página habitualmente para que não percam nenhuma alteração. 14.2 Fale conosco -
+                        Caso tenha ficado com alguma dúvida, ou queira esclarecer algum ponto, estamos
+                        inteiramente à disposição através de nossos canais de atendimento informados em
+                        nosso site. Outros assuntos relacionados à privacidade e dados pessoais podem
+                        ser tratados diretamente do através do e-mail .
+                    </p>
+
+                    <p class="mt-4 text-right text-sm">Estes Termos e Condições foram alterados em 19 de fevereiro de 2025.</p>
+                </div>
+                <div class="terms-popup-buttons">
+                    <button
+                        id="declineTerms"
+                        class="px-6 py-2 bg-gray-300 text-gray-700 rounded-full hover:bg-gray-400 transition text-base">
+                        Recusar
+                    </button>
+                    <button
+                        id="acceptTerms"
+                        class="px-6 py-2 bg-primary text-white rounded-full hover:bg-opacity-90 transition text-base">
+                        Aceitar e Continuar
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- Navbar -->
-    <nav class="fixed w-full bg-white shadow-lg z-50">
-        <div class="container mx-auto px-4 py-3">
-            <div class="flex justify-between items-center">
-                <div>
-                    <img src="./assets/logo-nav.png" alt="VoePRO Logo" class="h-12">
-                </div>
-                <div>
-                    <a href="https://wa.me/5511999999999" 
-                       target="_blank" 
-                       class="flex items-center gap-2 bg-primary text-white px-6 py-2 rounded-full hover:bg-opacity-90 transition-all duration-300 hover:scale-105">
-                        <i class="fab fa-whatsapp text-xl"></i>
-                        <span>Faça a sua reserva</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <main>
-        <!-- Hero Section -->
-        <section id="home" class="pt-20 pb-12 bg-primary">
-            <div class="container mx-auto px-4">
-                <div class="flex flex-col md:flex-row items-center gap-8">
-                    <div class="md:w-1/2 text-white">
-                        <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
-                            <span class="text-secondary">Sobrevoando</span> fronteiras para que 
-                            <span class="text-secondary">você</span> possa 
-                            <span class="text-secondary">conhecer o mundo</span>
-                        </h1>
-                        <p class="text-2xl mb-8">Te ajudamos a encontrar os melhores preços de passagens aéreas</p>
-                        <a href="https://wa.me/5511999999999" 
-                           target="_blank"
-                           class="inline-flex items-center gap-2 bg-secondary text-white px-8 py-4 text-xl rounded-full hover:bg-opacity-90 transition">
-                            <i class="fab fa-whatsapp text-2xl"></i>
-                            Consultar Agora
+        <!-- Navbar -->
+        <nav class="fixed w-full bg-white shadow-lg z-50">
+            <div class="container mx-auto px-4 py-3">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <img src="./assets/logo-nav.png" alt="VoePRO Logo" class="h-12">
+                    </div>
+                    <div>
+                        <a
+                            href="https://wa.me/5511999999999"
+                            target="_blank"
+                            class="flex items-center gap-2 bg-primary text-white px-6 py-2 rounded-full hover:bg-opacity-90 transition-all duration-300 hover:scale-105">
+                            <i class="fab fa-whatsapp text-xl"></i>
+                            <span>Faça a sua reserva</span>
                         </a>
                     </div>
-                    <div class="md:w-1/2">
-                        <!-- Slider main container -->
-                        <div class="swiper mySwiper rounded-lg overflow-hidden">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <img src="./assets/banner1.png" alt="Destino 1">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="./assets/banner2.png" alt="Destino 2">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="./assets/banner3.png" alt="Destino 3">
-                                </div>
-                            </div>
-                            <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </nav>
+
+        <main>
+            <!-- Hero Section -->
+            <section id="home" class="pt-20 pb-12 bg-primary">
+                <div class="container mx-auto px-4">
+                    <div class="flex flex-col md:flex-row items-center gap-8">
+                        <div class="md:w-1/2 text-white">
+                            <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
+                                <span class="text-secondary">Sobrevoando</span>
+                                fronteiras para que
+                                <span class="text-secondary">você</span>
+                                possa
+                                <span class="text-secondary">conhecer o mundo</span>
+                            </h1>
+                            <p class="text-2xl mb-8">Te ajudamos a encontrar os melhores preços de passagens aéreas</p>
+                            <a
+                                href="https://wa.me/5511999999999"
+                                target="_blank"
+                                class="inline-flex items-center gap-2 bg-secondary text-white px-8 py-4 text-xl rounded-full hover:bg-opacity-90 transition">
+                                <i class="fab fa-whatsapp text-2xl"></i>
+                                Consultar Agora
+                            </a>
                         </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Promoções Cards -->
-            <div class="container mx-auto px-4 mt-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-8">Promoções Imperdíveis</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Card 1 -->
-                    <div class="promo-card">
-                        <img src="./assets/banner4.png" alt="Promoção 1" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <span class="bg-secondary text-white px-4 py-2 rounded-full text-base">Pacote Completo</span>
-                            <h3 class="text-2xl font-bold mt-4 text-gray-800">Paris - França</h3>
-                            <p class="text-gray-600 mt-2 text-lg">7 dias | Hotel + Passagem + Transfer</p>
-                            <div class="mt-4 flex justify-between items-center">
-                                <div>
-                                    <span class="text-gray-400 line-through text-lg">R$ 8.999</span>
-                                    <p class="text-primary font-bold text-3xl">R$ 6.999</p>
-                                </div>
-                                <a href="https://wa.me/5511999999999" target="_blank" 
-                                   class="bg-primary text-white px-6 py-3 text-lg rounded-full hover:bg-opacity-90 transition">
-                                    Reservar
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Card 2 -->
-                    <div class="promo-card">
-                        <img src="./assets/banner5.png" alt="Promoção 2" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <span class="bg-secondary text-white px-4 py-2 rounded-full text-base">Pacote Completo</span>
-                            <h3 class="text-2xl font-bold mt-4 text-gray-800">Cancún - México</h3>
-                            <p class="text-gray-600 mt-2 text-lg">5 dias | All Inclusive</p>
-                            <div class="mt-4 flex justify-between items-center">
-                                <div>
-                                    <span class="text-gray-400 line-through text-lg">R$ 7.999</span>
-                                    <p class="text-primary font-bold text-3xl">R$ 5.999</p>
-                                </div>
-                                <a href="https://wa.me/5511999999999" target="_blank" 
-                                   class="bg-primary text-white px-6 py-3 text-lg rounded-full hover:bg-opacity-90 transition">
-                                    Reservar
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Card 3 -->
-                    <div class="promo-card">
-                        <img src="./assets/banner3.png" alt="Promoção 3" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <span class="bg-secondary text-white px-4 py-2 rounded-full text-base">Pacote Completo</span>
-                            <h3 class="text-2xl font-bold mt-4 text-gray-800">Dubai - EAU</h3>
-                            <p class="text-gray-600 mt-2 text-lg">8 dias | Hotel 5 Estrelas</p>
-                            <div class="mt-4 flex justify-between items-center">
-                                <div>
-                                    <span class="text-gray-400 line-through text-lg">R$ 12.999</span>
-                                    <p class="text-primary font-bold text-3xl">R$ 9.999</p>
-                                </div>
-                                <a href="https://wa.me/5511999999999" target="_blank" 
-                                   class="bg-primary text-white px-6 py-3 text-lg rounded-full hover:bg-opacity-90 transition">
-                                    Reservar
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section id="about" class="py-20 bg-white">
-            <div class="container mx-auto px-4">
-                <div class="flex flex-col md:flex-row items-center">
-                    <div class="md:w-1/2">
-                        <h2 class="text-4xl md:text-5xl font-bold mb-6">
-                            <span class="text-primary">Quem</span> 
-                            <span class="text-secondary">somos</span>
-                        </h2>
-                        <p class="text-gray-600 text-xl mb-8">Anos de experiência no mercado de viagens, oferecendo as melhores oportunidades para nossos clientes. Trabalhamos com dedicação para tornar suas viagens inesquecíveis, sempre com os melhores preços e condições.</p>
-                        
-                        <div class="grid grid-cols-2 gap-6 mt-8">
-                            <div class="flex items-center space-x-3">
-                                <i class="fas fa-check-circle text-primary text-2xl"></i>
-                                <span class="text-gray-600 text-lg">Experiência comprovada</span>
-                            </div>
-                            <div class="flex items-center space-x-3">
-                                <i class="fas fa-check-circle text-primary text-2xl"></i>
-                                <span class="text-gray-600 text-lg">Suporte 24/7</span>
-                            </div>
-                            <div class="flex items-center space-x-3">
-                                <i class="fas fa-check-circle text-primary text-2xl"></i>
-                                <span class="text-gray-600 text-lg">Melhores Preços</span>
-                            </div>
-                            <div class="flex items-center space-x-3">
-                                <i class="fas fa-check-circle text-primary text-2xl"></i>
-                                <span class="text-gray-600 text-lg">Atendimento premium</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="md:w-1/2 mt-8 md:mt-0 md:pl-12 parallax-container">
-                        <img src="./assets/banner2.png" alt="Banner VoePRO Quem Somos" class="w-full h-auto rounded-lg shadow-xl floating-banner">
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Seção após About -->
-        <section class="py-20 bg-white">
-            <div class="container mx-auto px-4">
-                <div class="flex flex-col md:flex-row items-center">
-                    <div class="md:w-1/2 mt-8 md:mt-0 parallax-container order-2 md:order-1">
-                        <img src="./assets/banner3.png" alt="Banner VoePRO 3" class="w-full h-auto rounded-lg shadow-xl floating-banner">
-                    </div>
-                    <div class="md:w-1/2 md:pl-12 order-1 md:order-2">
-                        <h2 class="text-3xl md:text-4xl font-bold mb-4">
-                            <span class="text-primary">Viaje com</span> 
-                            <span class="text-secondary">conforto</span>
-                        </h2>
-                        <p class="text-gray-600 text-lg mb-6">Descubra o mundo com o máximo de conforto e segurança. Oferecemos as melhores opções para sua viagem dos sonhos.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Seção antes da Galeria -->
-        <section class="py-20 bg-gray-50">
-            <div class="container mx-auto px-4">
-                <div class="flex flex-col md:flex-row items-center">
-                    <div class="md:w-1/2">
-                        <h2 class="text-3xl md:text-4xl font-bold mb-4">
-                            <span class="text-primary">Destinos</span> 
-                            <span class="text-secondary">incríveis</span>
-                        </h2>
-                        <p class="text-gray-600 text-lg mb-6">Explore destinos únicos e crie memórias inesquecíveis com nossas ofertas exclusivas.</p>
-                    </div>
-                    <div class="md:w-1/2 mt-8 md:mt-0 md:pl-12 parallax-container">
-                        <img src="./assets/banner5.png" alt="Banner VoePRO 4" class="w-full h-auto rounded-lg shadow-xl floating-banner">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Seção após a Galeria -->
-        <section class="py-20 bg-white">
-            <div class="container mx-auto px-4">
-                <div class="flex flex-col md:flex-row items-center">
-                    <div class="md:w-1/2 mt-8 md:mt-0 parallax-container order-2 md:order-1">
-                        <img src="./assets/banner4.png" alt="Banner VoePRO 5" class="w-full h-auto rounded-lg shadow-xl floating-banner">
-                    </div>
-                    <div class="md:w-1/2 md:pl-12 order-1 md:order-2">
-                        <h2 class="text-3xl md:text-4xl font-bold mb-4">
-                            <span class="text-primary">Experiências</span> 
-                            <span class="text-secondary">únicas</span>
-                        </h2>
-                        <p class="text-gray-600 text-lg mb-6">Cada viagem é uma nova história para contar. Deixe-nos criar experiências memoráveis para você.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Gallery Section -->
-        <section id="gallery" class="py-20 bg-gray-50">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">
-                    <span class="text-white">Experiências</span> 
-                    <span class="text-secondary">VoePRO</span>
-                </h2>
-                <p class="text-center text-gray-600 mb-12">
-                    <span class="text-secondary">Conheça</span> as histórias dos nossos viajantes
-                </p>
-                
-                <div class="instagram-grid">
-                    <!-- Item 1 -->
-                    <div class="instagram-item">
-                        <img src="./assets/imagem-galeria1.jpg" alt="Viagem Paris">
-                        <div class="instagram-overlay">
-                            <div class="text-white">
-                                <div class="flex items-center mb-3">
-                                    <img src="avatar1.jpg" alt="Cliente" class="w-10 h-10 rounded-full mr-3">
-                                    <div>
-                                        <h4 class="font-semibold">Maria Silva</h4>
-                                        <p class="text-sm">Paris, França</p>
+                        <div class="md:w-1/2">
+                            <!-- Slider main container -->
+                            <div class="swiper mySwiper rounded-lg overflow-hidden">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <img src="./assets/banner1.png" alt="Destino 1">
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="./assets/banner2.png" alt="Destino 2">
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="./assets/banner3.png" alt="Destino 3">
                                     </div>
                                 </div>
-                                <p class="text-sm line-clamp-3">"Viagem incrível! A VoePRO cuidou de tudo, desde as passagens até a hospedagem. Realizar meu sonho de conhecer Paris foi ainda mais especial com todo o suporte que recebi!"</p>
+                                <div class="swiper-pagination"></div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Item 2 -->
-                    <div class="instagram-item">
-                        <img src="./assets/imagem-galeria2.jpg" alt="Viagem Maldivas">
-                        <div class="instagram-overlay">
-                            <div class="text-white">
-                                <div class="flex items-center mb-3">
-                                    <img src="avatar2.jpg" alt="Cliente" class="w-10 h-10 rounded-full mr-3">
+                <!-- Promoções Cards -->
+                <div class="container mx-auto px-4 mt-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-8">Promoções Imperdíveis</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Card 1 -->
+                        <div class="promo-card">
+                            <img
+                                src="./assets/banner4.png"
+                                alt="Promoção 1"
+                                class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <span class="bg-secondary text-white px-4 py-2 rounded-full text-base">Pacote Completo</span>
+                                <h3 class="text-2xl font-bold mt-4 text-gray-800">Paris - França</h3>
+                                <p class="text-gray-600 mt-2 text-lg">7 dias | Hotel + Passagem + Transfer</p>
+                                <div class="mt-4 flex justify-between items-center">
                                     <div>
-                                        <h4 class="font-semibold">João Santos</h4>
-                                        <p class="text-sm">Maldivas</p>
+                                        <span class="text-gray-400 line-through text-lg">R$ 8.999</span>
+                                        <p class="text-primary font-bold text-3xl">R$ 6.999</p>
                                     </div>
+                                    <a
+                                        href="https://wa.me/5511999999999"
+                                        target="_blank"
+                                        class="bg-primary text-white px-6 py-3 text-lg rounded-full hover:bg-opacity-90 transition">
+                                        Reservar
+                                    </a>
                                 </div>
-                                <p class="text-sm line-clamp-3">"Lua de mel perfeita! As Maldivas são um paraíso e a VoePRO tornou tudo mais fácil. Preço justo e atendimento excepcional!"</p>
                             </div>
                         </div>
-                    </div>
-                    <div class="instagram-item">
-                        <img src="./assets/imagem-galeria3.jpg" alt="Viagem Maldivas">
-                        <div class="instagram-overlay">
-                            <div class="text-white">
-                                <div class="flex items-center mb-3">
-                                    <img src="avatar2.jpg" alt="Cliente" class="w-10 h-10 rounded-full mr-3">
+
+                        <!-- Card 2 -->
+                        <div class="promo-card">
+                            <img
+                                src="./assets/banner5.png"
+                                alt="Promoção 2"
+                                class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <span class="bg-secondary text-white px-4 py-2 rounded-full text-base">Pacote Completo</span>
+                                <h3 class="text-2xl font-bold mt-4 text-gray-800">Cancún - México</h3>
+                                <p class="text-gray-600 mt-2 text-lg">5 dias | All Inclusive</p>
+                                <div class="mt-4 flex justify-between items-center">
                                     <div>
-                                        <h4 class="font-semibold">João Santos</h4>
-                                        <p class="text-sm">Maldivas</p>
+                                        <span class="text-gray-400 line-through text-lg">R$ 7.999</span>
+                                        <p class="text-primary font-bold text-3xl">R$ 5.999</p>
                                     </div>
-                                </div>
-                                <p class="text-sm line-clamp-3">"Lua de mel perfeita! As Maldivas são um paraíso e a VoePRO tornou tudo mais fácil. Preço justo e atendimento excepcional!"</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Adicionar mais items conforme necessário -->
-                </div>
-            </div>
-
-            <!-- Modal para visualização expandida -->
-            <div class="modal" id="gallery-modal">
-                <span class="modal-close">&times;</span>
-                <div class="modal-content">
-                    <div class="grid md:grid-cols-2">
-                        <div class="aspect-square">
-                            <img src="" alt="" class="w-full h-full object-cover" id="modal-image">
-                        </div>
-                        <div class="p-6 bg-white">
-                            <div class="flex items-center mb-4">
-                                <img src="" alt="" class="w-12 h-12 rounded-full mr-4" id="modal-avatar">
-                                <div>
-                                    <h4 class="font-semibold" id="modal-name"></h4>
-                                    <p class="text-gray-600" id="modal-location"></p>
+                                    <a
+                                        href="https://wa.me/5511999999999"
+                                        target="_blank"
+                                        class="bg-primary text-white px-6 py-3 text-lg rounded-full hover:bg-opacity-90 transition">
+                                        Reservar
+                                    </a>
                                 </div>
                             </div>
-                            <div class="mb-4">
-                                <p class="text-gray-800" id="modal-description"></p>
-                            </div>
-                            <div class="text-sm text-gray-500">
-                                <p>Viagem realizada pela VoePRO</p>
-                                <p class="mt-1" id="modal-date"></p>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="promo-card">
+                            <img
+                                src="./assets/banner3.png"
+                                alt="Promoção 3"
+                                class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <span class="bg-secondary text-white px-4 py-2 rounded-full text-base">Pacote Completo</span>
+                                <h3 class="text-2xl font-bold mt-4 text-gray-800">Dubai - EAU</h3>
+                                <p class="text-gray-600 mt-2 text-lg">8 dias | Hotel 5 Estrelas</p>
+                                <div class="mt-4 flex justify-between items-center">
+                                    <div>
+                                        <span class="text-gray-400 line-through text-lg">R$ 12.999</span>
+                                        <p class="text-primary font-bold text-3xl">R$ 9.999</p>
+                                    </div>
+                                    <a
+                                        href="https://wa.me/5511999999999"
+                                        target="_blank"
+                                        class="bg-primary text-white px-6 py-3 text-lg rounded-full hover:bg-opacity-90 transition">
+                                        Reservar
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
+            </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-12">
-                <span class="text-white">Entre em</span> 
-                <span class="text-secondary">contato</span>
-            </h2>
-            
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- WhatsApp Card -->
-                <div class="glass-panel p-8 rounded-xl text-center">
-                    <div class="icon text-primary text-6xl mb-4">
-                        <i class="fab fa-whatsapp"></i>
+            <!-- About Section -->
+            <section id="about" class="py-20 bg-white">
+                <div class="container mx-auto px-4">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/2">
+                            <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                                <span class="text-primary">Quem</span>
+                                <span class="text-secondary">somos</span>
+                            </h2>
+                            <p class="text-gray-600 text-xl mb-8">Anos de experiência no mercado de viagens,
+                                oferecendo as melhores oportunidades para nossos clientes. Trabalhamos com
+                                dedicação para tornar suas viagens inesquecíveis, sempre com os melhores preços
+                                e condições.</p>
+
+                            <div class="grid grid-cols-2 gap-6 mt-8">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fas fa-check-circle text-primary text-2xl"></i>
+                                    <span class="text-gray-600 text-lg">Experiência comprovada</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <i class="fas fa-check-circle text-primary text-2xl"></i>
+                                    <span class="text-gray-600 text-lg">Suporte 24/7</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <i class="fas fa-check-circle text-primary text-2xl"></i>
+                                    <span class="text-gray-600 text-lg">Melhores Preços</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <i class="fas fa-check-circle text-primary text-2xl"></i>
+                                    <span class="text-gray-600 text-lg">Atendimento premium</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="md:w-1/2 mt-8 md:mt-0 md:pl-12 parallax-container">
+                            <img
+                                src="./assets/banner2.png"
+                                alt="Banner VoePRO Quem Somos"
+                                class="w-full h-auto rounded-lg shadow-xl floating-banner">
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-semibold mb-3">WhatsApp</h3>
-                    <p class="text-gray-600 text-lg mb-4">Atendimento imediato</p>
-                    <a href="https://wa.me/5511999999999" target="_blank" 
-                       class="inline-block bg-primary text-white px-6 py-3 text-lg rounded-full hover:bg-opacity-90 transition">
-                        Conversar agora
-                    </a>
                 </div>
+            </section>
 
-                <!-- Instagram Card -->
-                <div class="glass-panel p-8 rounded-xl text-center">
-                    <div class="icon text-primary text-6xl mb-4">
-                        <i class="fab fa-instagram"></i>
+            <!-- Seção após About -->
+            <section class="py-20 bg-white">
+                <div class="container mx-auto px-4">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/2 mt-8 md:mt-0 parallax-container order-2 md:order-1">
+                            <img
+                                src="./assets/banner3.png"
+                                alt="Banner VoePRO 3"
+                                class="w-full h-auto rounded-lg shadow-xl floating-banner">
+                        </div>
+                        <div class="md:w-1/2 md:pl-12 order-1 md:order-2">
+                            <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                                <span class="text-primary">Viaje com</span>
+                                <span class="text-secondary">conforto</span>
+                            </h2>
+                            <p class="text-gray-600 text-lg mb-6">Descubra o mundo com o máximo de conforto
+                                e segurança. Oferecemos as melhores opções para sua viagem dos sonhos.</p>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-semibold mb-3">Instagram</h3>
-                    <p class="text-gray-600 text-lg mb-4">Siga nossas ofertas</p>
-                    <a href="https://instagram.com/voepro" target="_blank"
-                       class="inline-block bg-primary text-white px-6 py-3 text-lg rounded-full hover:bg-opacity-90 transition">
-                        Seguir perfil
-                    </a>
                 </div>
+            </section>
 
-                <!-- Telefone Card -->
-                <div class="glass-panel p-8 rounded-xl text-center">
-                    <div class="icon text-primary text-6xl mb-4">
-                        <i class="fas fa-mobile-alt"></i>
+            <!-- Seção antes da Galeria -->
+            <section class="py-20 bg-gray-50">
+                <div class="container mx-auto px-4">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/2">
+                            <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                                <span class="text-primary">Destinos</span>
+                                <span class="text-secondary">incríveis</span>
+                            </h2>
+                            <p class="text-gray-600 text-lg mb-6">Explore destinos únicos e crie memórias
+                                inesquecíveis com nossas ofertas exclusivas.</p>
+                        </div>
+                        <div class="md:w-1/2 mt-8 md:mt-0 md:pl-12 parallax-container">
+                            <img
+                                src="./assets/banner5.png"
+                                alt="Banner VoePRO 4"
+                                class="w-full h-auto rounded-lg shadow-xl floating-banner">
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-semibold mb-3">Telefone</h3>
-                    <p class="text-gray-600 text-lg mb-4">Atendimento comercial</p>
-                    <a href="tel:+551199999999" 
-                       class="inline-block bg-primary text-white px-6 py-3 text-lg rounded-full hover:bg-opacity-90 transition">
-                        Ligar agora
-                    </a>
                 </div>
-            </div>
-        </div>
-    </section>
-    </main>
+            </section>
 
-    <!-- Footer -->
-    <footer class="bg-primary text-white py-8 bottom-0 w-full">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-lg">&copy; 2025 VoePRO. Todos os direitos reservados.</p>
-                
-                <!-- Social e Contato -->
-                <div class="flex items-center gap-6">
-                    <a href="mailto:contato@voepro.com.br" 
-                       class="hover:text-secondary transition-colors duration-300 flex items-center gap-2 text-lg">
-                        <i class="fas fa-envelope text-xl"></i>
-                        <span>contato@voepro.com.br</span>
-                    </a>
-                    
-                    <!-- Redes Sociais -->
+            <!-- Seção após a Galeria -->
+            <section class="py-20 bg-white">
+                <div class="container mx-auto px-4">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/2 mt-8 md:mt-0 parallax-container order-2 md:order-1">
+                            <img
+                                src="./assets/banner4.png"
+                                alt="Banner VoePRO 5"
+                                class="w-full h-auto rounded-lg shadow-xl floating-banner">
+                        </div>
+                        <div class="md:w-1/2 md:pl-12 order-1 md:order-2">
+                            <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                                <span class="text-primary">Experiências</span>
+                                <span class="text-secondary">únicas</span>
+                            </h2>
+                            <p class="text-gray-600 text-lg mb-6">Cada viagem é uma nova história para
+                                contar. Deixe-nos criar experiências memoráveis para você.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-primary text-white py-8 bottom-0 w-full">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p class="text-lg">&copy; 2025 VoePRO. Todos os direitos reservados.</p>
+
+                    <!-- Social e Contato -->
                     <div class="flex items-center gap-6">
-                        <a href="https://instagram.com/voepro" 
-                           target="_blank" 
-                           class="hover:text-secondary transition-colors duration-300">
-                            <i class="fab fa-instagram text-2xl"></i>
+                        <a href="mailto:contato@voepro.com.br" 
+                           class="hover:text-secondary transition-colors duration-300 flex items-center gap-2 text-lg">
+                            <i class="fas fa-envelope text-xl"></i>
+                            <span>contato@voepro.com.br</span>
                         </a>
-                        <a href="https://facebook.com/voepro" 
-                           target="_blank" 
-                           class="hover:text-secondary transition-colors duration-300">
-                            <i class="fab fa-facebook text-2xl"></i>
-                        </a>
-                        <a href="https://wa.me/seunumero" 
-                           target="_blank" 
-                           class="hover:text-secondary transition-colors duration-300">
-                            <i class="fab fa-whatsapp text-2xl"></i>
-                        </a>
+                        
+                        <!-- Redes Sociais -->
+                        <div class="flex items-center gap-6">
+                            <a href="https://instagram.com/voepro" 
+                               target="_blank" 
+                               class="hover:text-secondary transition-colors duration-300">
+                                <i class="fab fa-instagram text-2xl"></i>
+                            </a>
+                            <a href="https://facebook.com/voepro" 
+                               target="_blank" 
+                               class="hover:text-secondary transition-colors duration-300">
+                                <i class="fab fa-facebook text-2xl"></i>
+                            </a>
+                            <a href="https://wa.me/seunumero" 
+                               target="_blank" 
+                               class="hover:text-secondary transition-colors duration-300">
+                                <i class="fab fa-whatsapp text-2xl"></i>
+                            </a>
+                        </div>
                     </div>
+
+                    <a href="termos.html" 
+                       class="hover:text-secondary transition-colors duration-300 text-lg">
+                        Termos de Uso
+                    </a>
                 </div>
-
-                <a href="./assets/TERMOS DE USO - CONDICOES - PRIVACIDADE.pdf" 
-                   target="_blank"
-                   class="hover:text-secondary transition-colors duration-300 text-lg">
-                    Termos de Uso
-                </a>
             </div>
-        </div>
-    </footer>
+        </footer>
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-    <!-- JavaScript -->
-    <script src="main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script>
-        var swiper = new Swiper(".mySwiper", {
-            effect: "fade",
-            autoplay: {
-                delay: 2500,
-                disableOnInteraction: false,
-            },
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-            },
-        });
-    </script>
-</body>
-</html> 
+        <!-- Font Awesome -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+        <!-- JavaScript -->
+        <script src="main.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <script>
+            var swiper = new Swiper(".mySwiper", {
+                effect: "fade",
+                autoplay: {
+                    delay: 2500,
+                    disableOnInteraction: false
+                },
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true
+                }
+            });
+        </script>
+    </body>
+</html>
