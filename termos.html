@@ -52,7 +52,48 @@
         .terms-content {
             max-width: 900px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 1.5rem;
+        }
+        
+        /* Ajustes para versão mobile */
+        @media (max-width: 640px) {
+            .terms-content {
+                padding: 1rem;
+            }
+            
+            .terms-content h1 {
+                font-size: 1.75rem;
+            }
+            
+            .terms-content h2 {
+                font-size: 1.5rem;
+            }
+            
+            .terms-content h3 {
+                font-size: 1.25rem;
+            }
+            
+            .terms-content p {
+                font-size: 0.9rem;
+            }
+            
+            nav a span {
+                display: none;
+            }
+            
+            nav a i {
+                font-size: 1.5rem;
+            }
+            
+            footer .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            footer .flex {
+                justify-content: center;
+                margin: 0.5rem 0;
+            }
         }
     </style>
 </head>
@@ -69,9 +110,9 @@
                 <div>
                     <a href="https://wa.me/5511999999999" 
                        target="_blank" 
-                       class="flex items-center gap-2 bg-primary text-white px-6 py-2 rounded-full hover:bg-opacity-90 transition-all duration-300 hover:scale-105">
+                       class="flex items-center gap-2 bg-primary text-white px-4 sm:px-6 py-2 rounded-full hover:bg-opacity-90 transition-all duration-300 hover:scale-105">
                         <i class="fab fa-whatsapp text-xl"></i>
-                        <span>Faça a sua reserva</span>
+                        <span class="hidden sm:inline">Faça a sua reserva</span>
                     </a>
                 </div>
             </div>
@@ -80,11 +121,11 @@
 
     <main class="pt-24 pb-12">
         <div class="terms-content bg-white rounded-lg shadow-lg text-gray-700">
-            <h1 class="text-3xl font-bold mb-6 text-primary">Termos de Uso</h1>
+            <h1 class="text-2xl sm:text-3xl font-bold mb-6 text-primary">Termos de Uso</h1>
             
-            <div class="text-gray-600 text-justify mb-6">
-                <p class="mb-4 font-bold">TERMOS E CONDIÇÕES GERAIS DE USO; POLÍTICAS DE
-                    PRIVACIDADE E DEMAIS DOCUMENTOS INCORPORADOS AOS MESMO POR REFERÊNCIA</p>
+            <div class="text-gray-600 text-justify text-sm sm:text-base mb-6">
+                <p class="mb-4 font-bold">TERMOS E CONDIÇÕES GERAIS DE USO; POLÍTICAS DE PRIVACIDADE E DEMAIS DOCUMENTOS INCORPORADOS AOS MESMO POR REFERÊNCIA</p>
+                
                 <p>Ao utilizar os nossos serviços, você concorda com estas condições
                     estabelecidas. Estes termos e condições são complementares às nossas Políticas
                     de Proteção de Dados, por isso, caso não concorde com estas condições, não
@@ -1145,7 +1186,7 @@
             </div>
             
             <div class="flex justify-center mt-8 mb-4">
-                <a href="index.html" class="px-8 py-3 bg-primary text-white rounded-full hover:bg-opacity-90 transition-all duration-300">
+                <a href="index.html" class="px-6 sm:px-8 py-2 sm:py-3 bg-primary text-white text-sm sm:text-base rounded-full hover:bg-opacity-90 transition-all duration-300">
                     Voltar para a página inicial
                 </a>
             </div>
@@ -1156,32 +1197,32 @@
     <footer class="bg-primary text-white py-6 w-full">
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-lg">&copy; 2025 VoePRO. Todos os direitos reservados.</p>
+                <p class="text-sm sm:text-lg">&copy; 2025 VoePRO. Todos os direitos reservados.</p>
                 
                 <!-- Social e Contato -->
-                <div class="flex items-center gap-6">
+                <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
                     <a href="mailto:contato@voepro.com.br" 
-                       class="hover:text-secondary transition-colors duration-300 flex items-center gap-2 text-lg">
+                       class="hover:text-secondary transition-colors duration-300 flex items-center gap-2 text-sm sm:text-lg">
                         <i class="fas fa-envelope text-xl"></i>
-                        <span>contato@voepro.com.br</span>
+                        <span class="hidden sm:inline">contato@voepro.com.br</span>
                     </a>
                     
                     <!-- Redes Sociais -->
-                    <div class="flex items-center gap-6">
+                    <div class="flex items-center gap-4 sm:gap-6">
                         <a href="https://instagram.com/voepro" 
                            target="_blank" 
                            class="hover:text-secondary transition-colors duration-300">
-                            <i class="fab fa-instagram text-2xl"></i>
+                            <i class="fab fa-instagram text-xl sm:text-2xl"></i>
                         </a>
                         <a href="https://facebook.com/voepro" 
                            target="_blank" 
                            class="hover:text-secondary transition-colors duration-300">
-                            <i class="fab fa-facebook text-2xl"></i>
+                            <i class="fab fa-facebook text-xl sm:text-2xl"></i>
                         </a>
                         <a href="https://wa.me/5511999999999" 
                            target="_blank" 
                            class="hover:text-secondary transition-colors duration-300">
-                            <i class="fab fa-whatsapp text-2xl"></i>
+                            <i class="fab fa-whatsapp text-xl sm:text-2xl"></i>
                         </a>
                     </div>
                 </div>
